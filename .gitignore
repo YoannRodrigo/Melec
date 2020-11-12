@@ -58,3 +58,12 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+#Rider files
+/Assets/Plugins/Editor/JetBrains/*
+/Assets/Plugins/Editor/JetBrains.meta
+/.idea/*
+/.vs/*
+/Assets/ProCore/ProBuilder/Data/*
+
+
