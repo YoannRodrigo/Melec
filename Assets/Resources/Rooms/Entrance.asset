@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   nbEnemies: 0
-  roomPrefab: {fileID: 2415045937768195637, guid: 374d337883d90e0408a5b35c9eaf7c7c, type: 3}
+  roomPrefab: {fileID: 7787199824227060407, guid: 8cbfda509ad72c14193fe72bfaeff143, type: 3}
