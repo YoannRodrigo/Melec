@@ -58,7 +58,7 @@ public class ScriptableRoom : ScriptableObject
             Vector3 randomPos = new Vector3(Random.Range(floor.transform.position.x - 6,floor.transform.position.x + 6),
                 0, 
                 Random.Range(floor.transform.position.z - 3f, floor.transform.position.z + 3f));
-            Instantiate(enemies[Random.Range(0, enemies.Count)], randomPos, Quaternion.identity);
+            Instantiate(enemies[Random.Range(0, enemies.Count)], randomPos, Quaternion.identity,floor.transform).SetActive(false);
         }
     }
 }
