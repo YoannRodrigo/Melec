@@ -1,5 +1,6 @@
 ﻿using RhythmTool;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class EnemyController : MonoBehaviour
     public GameObject firePoint;
     private const float TIME_BEFORE_SHOT = 2;
     public float life;
-    public SoundManager soundManager;
+    private SoundManager soundManager;
+    private CollectablesManager collectablesManager;
 
     private void OnEnable()
     {
@@ -51,6 +53,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        collectablesManager = FindObjectOfType<CollectablesManager>();
         playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
         soundManager = FindObjectOfType<SoundManager>();
     }
@@ -84,6 +87,8 @@ public class EnemyController : MonoBehaviour
     {
         if (life <= 0)
         {
+            int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
+            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
             Destroy(gameObject);
         }
     }
