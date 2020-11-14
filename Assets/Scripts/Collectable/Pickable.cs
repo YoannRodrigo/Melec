@@ -11,8 +11,9 @@ public class Pickable : MonoBehaviour
         gameObject.transform.Rotate(50f,0,0);
     }
 
-    public void OnTriggerEnter(Collider other){
-        if (other.GetComponent<Inventory>().Add(atomType)) {
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Inventory>() && other.GetComponent<Inventory>().Add(atomType)) {
             Destroy(gameObject);
         }
         
