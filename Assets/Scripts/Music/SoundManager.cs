@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RhythmTool;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -12,6 +13,25 @@ public class SoundManager : MonoBehaviour
     private RhythmData rhythmData;
     private RhythmEventProvider eventProvider;
 
+    private static float _masterVolume = 1;
+    private static float _musicVolume = 0.4f;
+    private static float _soundEffectVolume = 1;
+
+    public void SetMasterVolume(Slider slider)
+    {
+        _masterVolume = slider.value;
+    }
+
+    public void SetMusicVolume(Slider slider)
+    {
+        _musicVolume = slider.value;
+    }
+    
+    public void SetSoundEffectVolume(Slider slider)
+    {
+        _soundEffectVolume = slider.value;
+    }
+    
     public RhythmData GetRhythmData()
     {
         return rhythmData;
@@ -47,7 +67,7 @@ public class SoundManager : MonoBehaviour
         }
         
         currentClip.clip = Resources.Load("Music/"+musicName) as AudioClip;
-        currentClip.volume = 0.2f;
+        currentClip.volume = _masterVolume * _musicVolume;
         currentClip.Play();
         
     }
