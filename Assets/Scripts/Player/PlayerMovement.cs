@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
    private void MovePlayer()
    {
       Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-      rb.transform.position += movement * (SPEED * Time.deltaTime);
+      rb.velocity = new Vector3 (0, rb.velocity.y, 0) + SPEED * movement;
       if (!isShooting)
       {
          RotatePlayer(movement);

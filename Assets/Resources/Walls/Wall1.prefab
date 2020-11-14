@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7771485944332257342
 Transform:
@@ -139,8 +139,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,6 +201,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
       propertyPath: m_Name
       value: Batiment_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d457f97564c5abd44b695a4c8948a122, type: 3}
