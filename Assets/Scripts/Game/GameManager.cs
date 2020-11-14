@@ -20,15 +20,16 @@ public class GameManager : MonoBehaviour
     private const float TIME_BEFORE_CLICK = .1f;
     private float timeSinceLastClick = .1f;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }
     
     // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         gameState = GameStates.GAME;
+        player = GameObject.FindWithTag("Player");
         inventory = player.GetComponent<Inventory>();
     }
 

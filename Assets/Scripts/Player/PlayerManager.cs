@@ -5,6 +5,11 @@ public class PlayerManager : MonoBehaviour
 {
     private float life = 100;
 
+    private void Start()
+    {
+        GameManager.instance.Init();
+    }
+
 
     private void OnCollisionEnter(Collision other)
     {

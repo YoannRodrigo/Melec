@@ -10,11 +10,12 @@ public class EnemyController : MonoBehaviour
     public GameObject firePoint;
     private const float TIME_BEFORE_SHOT = 2;
     public float life;
-    private SoundManager soundManager;
+    internal SoundManager soundManager;
     private CollectablesManager collectablesManager;
     private int dropRate = 60;
 
-    private void OnEnable()
+    
+    protected virtual void OnEnable()
     {
         if (!soundManager)
         {
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             soundManager.GetEventProvider().Register<Beat>(OnBeat);
+            soundManager.GetEventProvider().Register<Onset>(OnSetEvent);
         }
     }
 
@@ -41,10 +43,16 @@ public class EnemyController : MonoBehaviour
         if(soundManager.GetEventProvider())
         {
             soundManager.GetEventProvider().Unregister<Beat>(OnBeat);
+            soundManager.GetEventProvider().Unregister<Onset>(OnSetEvent);
         }
     }
 
-    private void OnBeat(Beat beat)
+    protected virtual void OnSetEvent(Onset onset)
+    {
+    }
+    
+
+    protected virtual void OnBeat(Beat beat)
     {
         if(Time.timeScale != 0)
         {
@@ -52,7 +60,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         collectablesManager = FindObjectOfType<CollectablesManager>();
         playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
