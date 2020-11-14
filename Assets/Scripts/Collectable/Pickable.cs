@@ -12,7 +12,7 @@ public class Pickable : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other){
-        if (other.GetComponent<Inventory>().Add(atomType)) {
+        if (other.gameObject.tag == "Player" && other.GetComponent<Inventory>().Add(atomType)) {
             Destroy(gameObject);
         }
         
