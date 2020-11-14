@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-   private const float SPEED = 3;
+   private const float SPEED = 10;
    private Rigidbody rb;
    private bool isShooting = false;
    
