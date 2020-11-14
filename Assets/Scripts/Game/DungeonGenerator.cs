@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
     private List<ScriptableRoom> rooms = new List<ScriptableRoom>();
-    private Vector3 lastPos = new Vector3(0,0,-15f);
+    private Queue<ScriptableRoom> dungeonRooms = new Queue<ScriptableRoom>();
+    private Vector3 lastPos = new Vector3(0,0,-9f);
+    private readonly Random rng = new Random();
 
     private void Awake()
     {
         rooms = Resources.LoadAll<ScriptableRoom>("Rooms/").ToList();
+        ShuffleList();
     }
 
     private void Start()
@@ -19,9 +23,45 @@ public class DungeonGenerator : MonoBehaviour
 
     private void GenerateRooms()
     {
-        foreach (ScriptableRoom room in rooms)
+        CreateRoomsSequence();
+        int maxCount = dungeonRooms.Count;
+        for (int i = 0; i < maxCount; i++)
         {
-            lastPos = room.SpawnRoom(lastPos).position;
+            lastPos = dungeonRooms.Dequeue().SpawnRoom(lastPos).position;
+        }
+    }
+
+    private void CreateRoomsSequence()
+    {
+        foreach (ScriptableRoom room in rooms.Where(room => room.isEntrance))
+        {
+            dungeonRooms.Enqueue(room);
+            rooms.Remove(room);
+            break;
+        }
+
+        foreach (ScriptableRoom room in rooms.Where(room => !room.isEnd))
+        {
+            dungeonRooms.Enqueue(room);
+        }
+        
+        foreach (ScriptableRoom room in rooms.Where(room => room.isEnd))
+        {
+            dungeonRooms.Enqueue(room);
+            break;
+        }
+    }
+
+    private void ShuffleList()
+    {
+        int n = rooms.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            ScriptableRoom value = rooms[k];
+            rooms[k] = rooms[n];
+            rooms[n] = value;
         }
     }
 }
