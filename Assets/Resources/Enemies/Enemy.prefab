@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6861259136599679835, guid: 048ba26867848b244b97fce0b399c538, type: 3}
   firePoint: {fileID: 301097966415659110}
+  life: 2
 --- !u!65 &986876231024253556
 BoxCollider:
   m_ObjectHideFlags: 0
