@@ -12,6 +12,7 @@ public class ScriptableRoom : ScriptableObject
 
     private List<GameObject> walls = new List<GameObject>();
     private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> bosses = new List<GameObject>();
     private GameObject floor;
     public Transform SpawnRoom(Vector3 position)
     {
@@ -62,6 +63,7 @@ public class ScriptableRoom : ScriptableObject
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z),
                 Quaternion.identity,
                 floor.transform);
+            SpawnBoss();
         }
     }
 
@@ -75,5 +77,12 @@ public class ScriptableRoom : ScriptableObject
                 Random.Range(floor.transform.position.z - 3f, floor.transform.position.z + 3f));
             Instantiate(enemies[Random.Range(0, enemies.Count)], randomPos, Quaternion.identity,floor.transform).SetActive(false);
         }
+    }
+
+    private void SpawnBoss()
+    {
+        bosses = Resources.LoadAll<GameObject>("Bosses/").ToList();
+        int randomId = Random.Range(0,bosses.Count);
+        Instantiate(bosses[randomId], floor.transform.position, Quaternion.identity,floor.transform).SetActive(false);
     }
 }
