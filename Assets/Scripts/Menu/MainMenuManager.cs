@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +19,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         mainCanvas.worldCamera = Camera.main;
+        mainCanvas.planeDistance = 0.5f;
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
             mainMenu.SetActive(true);
@@ -68,7 +69,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickQuit()
     {
         #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        EditorApplication.isPlaying = false;
         #else
         Application.Quit();
         #endif
