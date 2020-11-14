@@ -2,17 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public CollectablesManager collectablesManager;
-    public List<Collectable> inventory = new List<Collectable>();
     public const int MAX_CAPACITY = 7;
+    public CollectablesManager collectablesManager;
+    public GameObject uiInventory;
+    public Sprite blankFiller;
+    public List<Collectable> inventory = new List<Collectable>();
 
+    // UI Functions
+
+    public void UpdateUIInventory()
+    {
+        GameObject uiInventorySlots = uiInventory.transform.Find("Slots").gameObject;
+        for(int i=0;i<MAX_CAPACITY;i++) {
+            if (i <inventory.Count) {
+                uiInventorySlots.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = inventory[i].sprite;
+            }else {
+                uiInventorySlots.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = blankFiller;
+            }
+        }
+    }
+
+
+    // Logical functions
     public bool Add(Collectable atomToAdd){
         if (inventory.Count < MAX_CAPACITY) {
             print("Added " + atomToAdd.collectableName + " to Inventory");
             inventory.Add(atomToAdd);
+            UpdateUIInventory();
             return true;
         }
         print("Inventory is full.");
@@ -35,7 +55,7 @@ public class Inventory : MonoBehaviour
             }
         }
         //Clear B
-        inventory[indexB] = null;
+        inventory.RemoveAt(indexB);
         
         //Return result
         if(result != null){
@@ -45,9 +65,9 @@ public class Inventory : MonoBehaviour
         else {
             print("EXU-PURO-SIOOOOOOOON ! Fusing " + nameA + " & " + nameB + " didn't worked...");
             //Clear A
-            inventory[indexA] = null;
+            inventory.RemoveAt(indexA);
         }
-
+        UpdateUIInventory();
         return result;
     }
 }
