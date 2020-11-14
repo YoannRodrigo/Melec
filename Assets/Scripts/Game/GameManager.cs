@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,21 +14,23 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private Inventory inventory;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }
     
     // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         gameState = GameStates.GAME;
+        player = GameObject.FindWithTag("Player");
         inventory = player.GetComponent<Inventory>();
     }
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetButton("InventoryMode"))
+    private void Update() 
+    {
+        if (player && Input.GetButton("InventoryMode"))
         {
             //Swap game state
             gameState = GameStates.INVENTORY;
