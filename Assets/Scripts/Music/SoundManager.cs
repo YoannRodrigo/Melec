@@ -47,6 +47,7 @@ public class SoundManager : MonoBehaviour
         }
         
         currentClip.clip = Resources.Load("Music/"+musicName) as AudioClip;
+        currentClip.volume = 0.2f;
         currentClip.Play();
         
     }

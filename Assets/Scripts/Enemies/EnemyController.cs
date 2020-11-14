@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     public GameObject firePoint;
     private const float TIME_BEFORE_SHOT = 2;
     public float life;
-    private RhythmData rhythmData;
-    private RhythmEventProvider eventProvider;
     private SoundManager soundManager;
 
     private void OnEnable()
@@ -38,12 +36,10 @@ public class EnemyController : MonoBehaviour
 
     private void ClearData()
     {
-        if(eventProvider)
+        if(soundManager.GetEventProvider())
         {
-            eventProvider.Unregister<Onset>(OnsetEvent);
+            soundManager.GetEventProvider().Unregister<Onset>(OnsetEvent);
         }
-        Destroy(rhythmData);
-        Destroy(eventProvider);
     }
 
     private void OnsetEvent(Onset onset)
