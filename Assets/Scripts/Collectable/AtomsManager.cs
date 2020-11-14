@@ -7,24 +7,21 @@ public class AtomsManager : MonoBehaviour
 
     public enum AtomAbb{
         H,
+        C,
+        N
     };
-
-    public static AtomsManager _instance = null;
+    
+    public Atom[] atomsArray;
     public GameObject atomPrefab;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public GameObject SpawnAtom(AtomAbb atom, Vector3 position){ 
+        GameObject atomToSpawn;
+        foreach(Atom a in atomsArray){
+            if(a.abbreviation == atom){
+                atomToSpawn = a.overworldGO;
+                atomToSpawn.GetComponent<Renderer>().material = a.material;
+            }
+        }
         return Instantiate(atomPrefab, position, Quaternion.identity);
     }
 }
