@@ -641,6 +641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songNames:
   - VaporWaveMain
+  - Laser
+  - Entropy
 --- !u!4 &708437060
 Transform:
   m_ObjectHideFlags: 0

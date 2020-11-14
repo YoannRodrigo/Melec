@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            soundManager.GetEventProvider().Register<Onset>(OnsetEvent);
+            soundManager.GetEventProvider().Register<Beat>(OnBeat);
         }
     }
 
@@ -40,11 +40,11 @@ public class EnemyController : MonoBehaviour
     {
         if(soundManager.GetEventProvider())
         {
-            soundManager.GetEventProvider().Unregister<Onset>(OnsetEvent);
+            soundManager.GetEventProvider().Unregister<Beat>(OnBeat);
         }
     }
 
-    private void OnsetEvent(Onset onset)
+    private void OnBeat(Beat beat)
     {
         if(Time.timeScale != 0)
         {
