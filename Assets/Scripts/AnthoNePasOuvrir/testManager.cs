@@ -11,11 +11,12 @@ public class testManager : MonoBehaviour
     public Inventory inventory;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        collectablesManager.SpawnAtom(CollectablesManager.AtomAbb.H, new Vector3(Random.Range(-7f,7f),1f,Random.Range(-5f,5f)));
-        collectablesManager.SpawnAtom(CollectablesManager.AtomAbb.C, new Vector3(Random.Range(-7f,7f),1f,Random.Range(-5f,5f)));
-        collectablesManager.SpawnAtom(CollectablesManager.AtomAbb.N, new Vector3(Random.Range(-7f,7f),1f,Random.Range(-5f,5f)));
+        int numberOfSpawn = Random.Range(2, 6);
+        for (int i = 0; i < numberOfSpawn; i++) {
+            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb)Random.Range(0,8), new Vector3(Random.Range(-6f,6f),1f,Random.Range(-2.8f,2.8f)));
+        }
     }
 
     void Update()
