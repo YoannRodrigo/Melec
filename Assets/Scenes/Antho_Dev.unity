@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 999196954}
   - component: {fileID: 999196953}
   - component: {fileID: 999196952}
+  - component: {fileID: 999196958}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -398,6 +399,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999196958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999196951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7daf4b474c28636469f1162f45b8646a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: []
 --- !u!1 &1086717714
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,9 +540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atomsArray:
   - {fileID: 11400000, guid: 9a1aaf7cc2d884246ad3e2f8f296440d, type: 2}
-  - {fileID: 11400000, guid: f8684f6d4a4e4484f832b6d88b61bd6c, type: 2}
-  - {fileID: 11400000, guid: cfdb219e46304954fa7b20774bbf06d2, type: 2}
-  atomPrefab: {fileID: 2771998385108402812, guid: af4417270c0a9bb45bc9de70b3ca835a, type: 3}
+  - {fileID: 11400000, guid: 8b6d4113c094dac4e94f062f9d2cc09c, type: 2}
+  - {fileID: 11400000, guid: 398ed43ffa72ed643b7a16d580d732f3, type: 2}
 --- !u!4 &1320785594
 Transform:
   m_ObjectHideFlags: 0
