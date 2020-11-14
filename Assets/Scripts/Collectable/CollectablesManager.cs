@@ -2,7 +2,11 @@
 
 public class CollectablesManager : MonoBehaviour
 {
-
+    public enum CollectableType {
+        ATOM,
+        MOLECULE
+    }
+    
     public enum AtomAbb{
         H,
         C,
@@ -12,7 +16,8 @@ public class CollectablesManager : MonoBehaviour
         O,
         S,
         SI,
-        FE
+        FE,
+        UNDEFINED
     };
     
     public enum MoleculeAbb{
@@ -26,17 +31,18 @@ public class CollectablesManager : MonoBehaviour
         SIO,
         HH,
         FES,
-        CLCL
+        CLCL,
+        UNDEFINED
     };
     
-    public Atom[] atomsArray;
-    public Molecule[] moleculesArray;
+    public Collectable[] atomsArray;
+    public Collectable[] moleculesArray;
 
     public void SpawnAtom(AtomAbb atomAbb, Vector3 position){ 
         GameObject goAtomToSpawn = new GameObject();
-        Atom atom = new Atom();
-        foreach(Atom currentAtom in atomsArray){
-            if(currentAtom.abbreviation == atomAbb){
+        Collectable atom = new Collectable();
+        foreach(Collectable currentAtom in atomsArray){
+            if(currentAtom.atomAbb == atomAbb){
                 atom = currentAtom;
             }
         }
@@ -49,7 +55,7 @@ public class CollectablesManager : MonoBehaviour
         Pickable p = goAtomToSpawn.AddComponent<Pickable>();
         p.atomType = atom;
         //Apply name
-        goAtomToSpawn.name = atom.abbreviation.ToString();
+        goAtomToSpawn.name = atom.atomAbb.ToString();
         //Apply position
         goAtomToSpawn.transform.position = position;
     }

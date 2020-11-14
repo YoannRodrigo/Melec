@@ -6,7 +6,7 @@ using UnityEngine;
 public class Pickable : MonoBehaviour
 {
 
-    public Atom atomType;
+    public Collectable atomType;
 
     void Awake()
     {
@@ -15,7 +15,9 @@ public class Pickable : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other){
-        other.GetComponent<Inventory>().Add(atomType);
-        Destroy(gameObject);
+        if (other.GetComponent<Inventory>().Add(atomType)) {
+            Destroy(gameObject);
+        }
+        
     }
 }
