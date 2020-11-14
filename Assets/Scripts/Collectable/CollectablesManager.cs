@@ -40,7 +40,7 @@ public class CollectablesManager : MonoBehaviour
 
     public void SpawnAtom(AtomAbb atomAbb, Vector3 position){ 
         GameObject goAtomToSpawn = new GameObject();
-        Collectable atom = new Collectable();
+        Collectable atom = ScriptableObject.CreateInstance<Collectable>();
         foreach(Collectable currentAtom in atomsArray){
             if(currentAtom.atomAbb == atomAbb){
                 atom = currentAtom;

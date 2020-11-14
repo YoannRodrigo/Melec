@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RhythmTool;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
@@ -10,7 +12,6 @@ public class SoundManager : MonoBehaviour
     private AudioSource currentClip;
     private RhythmData rhythmData;
     private RhythmEventProvider eventProvider;
-    private int sceneId = 0;
     
     private static float _masterVolume = 1;
     private static float _musicVolume = 0.4f;
@@ -50,8 +51,17 @@ public class SoundManager : MonoBehaviour
     {
         return eventProvider;
     }
-    
-    
+
+    private void Update()
+    {
+        if (currentClip && !currentClip.isPlaying)
+        {
+            StartRandomMusic();
+            AnalyzeCurrentClip();
+            CreateEventProviderOnCurrentSoundWithOffset();
+        }
+    }
+
     private void Start()
     {
         RhythmToolLib.CreateAnalyzer(true,true,withVolumeSampler:true);
