@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(Vector3.Scale(playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
+        transform.LookAt(Vector3.Scale(0.2f*playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
         /*if (timeSinceLastShot > TIME_BEFORE_SHOT)
         {
             timeSinceLastShot = 0;
