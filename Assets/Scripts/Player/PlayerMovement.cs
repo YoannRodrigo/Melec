@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
    private const float SPEED = 10;
    private Rigidbody rb;
-   private bool isShooting = false;
+   private bool isShooting;
    public Transform shootingPoint;
    public GameObject projectilePrefab;
    private float timeSinceLastShot = 2;

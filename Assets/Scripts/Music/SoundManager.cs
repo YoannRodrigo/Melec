@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RhythmTool;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,7 +10,37 @@ public class SoundManager : MonoBehaviour
     private AudioSource currentClip;
     private RhythmData rhythmData;
     private RhythmEventProvider eventProvider;
+    private int sceneId = 0;
+    
+    private static float _masterVolume = 1;
+    private static float _musicVolume = 0.4f;
+    private static float _soundEffectVolume = 1;
 
+    public void SetMasterVolume(Slider slider)
+    {
+        _masterVolume = slider.value;
+        UpdateVolume();
+    }
+
+    public void SetMusicVolume(Slider slider)
+    {
+        _musicVolume = slider.value;
+        UpdateVolume();
+    }
+    
+    public void SetSoundEffectVolume(Slider slider)
+    {
+        _soundEffectVolume = slider.value;
+    }
+
+    private void UpdateVolume()
+    {
+        if (currentClip)
+        {
+            currentClip.volume = _masterVolume * _musicVolume;
+        }
+    }
+    
     public RhythmData GetRhythmData()
     {
         return rhythmData;
@@ -24,6 +53,13 @@ public class SoundManager : MonoBehaviour
     
     
     private void Start()
+    {
+        RhythmToolLib.CreateAnalyzer(true,true,withVolumeSampler:true);
+        RhythmToolLib.SetOnsetDetectorParams(threshold: 0.7f);
+        RhythmToolLib.SetVolumeSamplerParams(smoothing: 14);
+    }
+
+    public void InitAnalyzer()
     {
         RhythmToolLib.CreateAnalyzer(true,true,withVolumeSampler:true);
         RhythmToolLib.SetOnsetDetectorParams(threshold: 0.7f);
@@ -47,7 +83,7 @@ public class SoundManager : MonoBehaviour
         }
         
         currentClip.clip = Resources.Load("Music/"+musicName) as AudioClip;
-        currentClip.volume = 0.2f;
+        currentClip.volume = _masterVolume * _musicVolume;
         currentClip.Play();
         
     }

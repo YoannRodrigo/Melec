@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Atom", menuName = "ScriptableObjects/Collectable/Atom", order = 1)]

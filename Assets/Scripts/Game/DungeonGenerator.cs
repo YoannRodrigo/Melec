@@ -7,7 +7,7 @@ public class DungeonGenerator : MonoBehaviour
 {
     public SoundManager soundManager;
     private List<ScriptableRoom> rooms = new List<ScriptableRoom>();
-    private Queue<ScriptableRoom> dungeonRooms = new Queue<ScriptableRoom>();
+    private readonly Queue<ScriptableRoom> dungeonRooms = new Queue<ScriptableRoom>();
     private Vector3 lastPos = new Vector3(-16f,0,0);
     private readonly Random rng = new Random();
 
@@ -19,10 +19,12 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Start()
     {
+        GenerateRooms();
+        soundManager = FindObjectOfType<SoundManager>();
+        soundManager.InitAnalyzer();
         soundManager.StartRandomMusic();
         soundManager.AnalyzeCurrentClip();
         soundManager.CreateEventProviderOnCurrentSoundWithOffset();
-        GenerateRooms();
     }
 
     private void GenerateRooms()

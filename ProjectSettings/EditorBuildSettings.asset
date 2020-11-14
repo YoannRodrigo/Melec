@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuMain.unity
     guid: d50401252aa7797469c4b24343393017
   - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: 527e6e65ac40824408be3b548eba83db
+  - enabled: 1
     path: Assets/Scenes/Yoann_Dev.unity
     guid: df05620ac13200f439586dfa4e43144b
   m_configObjects: {}

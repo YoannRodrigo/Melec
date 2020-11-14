@@ -11,13 +11,16 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform.position.x > transform.position.x + 8f)
+        if(playerTransform)
         {
-            transform.position += new Vector3(16,0,0);
-        }
-        else if  (playerTransform.position.x < transform.position.x - 8f)
-        {
-            transform.position += new Vector3(-16,0,0);
+            if (playerTransform.position.x > transform.position.x + 8f)
+            {
+                transform.position += new Vector3(16, 0, 0);
+            }
+            else if (playerTransform.position.x < transform.position.x - 8f)
+            {
+                transform.position += new Vector3(-16, 0, 0);
+            }
         }
     }
 }
