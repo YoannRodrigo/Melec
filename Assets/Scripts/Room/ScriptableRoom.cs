@@ -15,7 +15,7 @@ public class ScriptableRoom : ScriptableObject
     private GameObject floor;
     public Transform SpawnRoom(Vector3 position)
     {
-        Vector3 newPosition = new Vector3(position.x,position.y,position.z + 9f);
+        Vector3 newPosition = new Vector3(position.x + 16,position.y,position.z);
         floor = Instantiate(roomPrefab, newPosition, Quaternion.identity);
         SpawnWalls();
         SpawnEnemies();
@@ -25,7 +25,7 @@ public class ScriptableRoom : ScriptableObject
     private void SpawnWalls()
     {
         walls = Resources.LoadAll<GameObject>("Walls/").ToList();
-        for (float i = 1.5f; i < 8; i++)
+        for (float i = -7.5f; i < 8; i++)
         {
             int randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + i, 0, floor.transform.position.z - 4f),
@@ -33,41 +33,35 @@ public class ScriptableRoom : ScriptableObject
             randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + i, 0, floor.transform.position.z + 4f),
                 Quaternion.identity, floor.transform);
-            randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - i, 0, floor.transform.position.z - 4f),
-                Quaternion.identity, floor.transform);
-            randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - i, 0, floor.transform.position.z + 4f),
-                Quaternion.identity, floor.transform);
-            
         }
         for (float j = -3; j < 4; j++)
         {
-            int randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z + j),
-                Quaternion.identity,
-                floor.transform);
-            randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z + j),
-                Quaternion.identity,
-                floor.transform);
+            if(j!=0)
+            {
+                int randomId = Random.Range(0, walls.Count);
+                Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z + j),
+                    Quaternion.identity,
+                    floor.transform);
+                randomId = Random.Range(0, walls.Count);
+                Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z + j),
+                    Quaternion.identity,
+                    floor.transform);
+            }
         }
 
         if (isEntrance)
         {
             int randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 0.5f, 0, floor.transform.position.z - 4f),
-                Quaternion.identity, floor.transform);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 0.5f, 0, floor.transform.position.z - 4f),
-                Quaternion.identity, floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z),
+                Quaternion.identity,
+                floor.transform);
         }
         else if (isEnd)
         {
             int randomId = Random.Range(0,walls.Count);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 0.5f, 0, floor.transform.position.z + 4f),
-                Quaternion.identity, floor.transform);
-            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 0.5f, 0, floor.transform.position.z + 4f),
-                Quaternion.identity, floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z),
+                Quaternion.identity,
+                floor.transform);
         }
     }
 
