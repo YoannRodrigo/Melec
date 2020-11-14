@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ProjectileCollision : MonoBehaviour
 {
@@ -11,9 +12,18 @@ public class ProjectileCollision : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if(launcherInstanceId != other.gameObject.GetInstanceID())
+        if (other.gameObject.GetComponent<ProjectileCollision>())
+        {
+            Physics.IgnoreCollision(transform.GetComponent<Collider>(), other.collider);
+        }
+        else if(launcherInstanceId != other.gameObject.GetInstanceID())
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
