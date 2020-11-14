@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -21,14 +19,14 @@ public class Inventory : MonoBehaviour
         int resultLenght = (nameA + nameB).Length;
         foreach (Molecule m in collectablesManager.moleculesArray){
             if (m.abbreviation.ToString().Length == resultLenght) {
-                if ((nameA + nameB) == m.abbreviation.ToString() || (nameB + nameA) == m.abbreviation.ToString()) {
+                if (nameA + nameB == m.abbreviation.ToString() || nameB + nameA == m.abbreviation.ToString()) {
                     result = m;
                 }
             }
         }
         //Return result
         if(result != null){
-            print("Successfully created " + result.abbreviation.ToString() + " by fusing " + nameA + " & " + nameB);
+            print("Successfully created " + result.abbreviation + " by fusing " + nameA + " & " + nameB);
         }
         else {
             print("EXU-PURO-SIOOOOOOOON ! Fusing " + nameA + " & " + nameB + " didn't worked...");

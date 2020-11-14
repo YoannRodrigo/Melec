@@ -63,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickStartNewLevel()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 1);
+        SceneManager.LoadScene(1);
         OnClickReturnToGame();
     }
 
@@ -101,7 +101,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickMainMenu()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 0);
+        SceneManager.LoadScene(0);
         Destroy(gameObject);
     }
 }

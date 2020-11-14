@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 public class testManager : MonoBehaviour
 {
@@ -11,7 +7,7 @@ public class testManager : MonoBehaviour
     public Inventory inventory;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         int numberOfSpawn = Random.Range(2, 6);
         for (int i = 0; i < numberOfSpawn; i++) {
@@ -19,7 +15,7 @@ public class testManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {

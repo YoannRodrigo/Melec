@@ -13,7 +13,7 @@ public class CollectablesManager : MonoBehaviour
         S,
         SI,
         FE
-    };
+    }
     
     public enum MoleculeAbb{
         NACL,
@@ -27,7 +27,7 @@ public class CollectablesManager : MonoBehaviour
         HH,
         FES,
         CLCL
-    };
+    }
     
     public Atom[] atomsArray;
     public Molecule[] moleculesArray;
