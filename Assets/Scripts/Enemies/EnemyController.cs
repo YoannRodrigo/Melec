@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public GameObject projectilePrefab;
     public GameObject firePoint;
     private const float TIME_BEFORE_SHOT = 2;
+    public float life;
 
     private void Start()
     {
@@ -27,7 +28,25 @@ public class EnemyController : MonoBehaviour
     private void ShootProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.transform.position, Quaternion.identity);
-        projectile.GetComponent<ProjectileCollision>().SetEnemyInstanceId(gameObject.GetInstanceID());
+        projectile.GetComponent<ProjectileCollision>().SetLauncherInstanceId(gameObject.GetInstanceID());
         projectile.GetComponent<Rigidbody>().AddForce(2*transform.forward,ForceMode.Impulse);
+        Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.name.Contains("GoodProjectile"))
+        {
+            life--;
+            LifeCheck();
+        }
+    }
+
+    private void LifeCheck()
+    {
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

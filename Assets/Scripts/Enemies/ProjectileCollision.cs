@@ -2,16 +2,16 @@
 
 public class ProjectileCollision : MonoBehaviour
 {
-    private int enemyInstanceId;
+    private int launcherInstanceId;
 
-    public void SetEnemyInstanceId(int enemyInstanceId)
+    public void SetLauncherInstanceId(int launcherInstanceId)
     {
-        this.enemyInstanceId = enemyInstanceId;
+        this.launcherInstanceId = launcherInstanceId;
     }
     
     private void OnCollisionEnter(Collision other)
     {
-        if(enemyInstanceId != other.gameObject.GetInstanceID())
+        if(launcherInstanceId != other.gameObject.GetInstanceID())
         {
             Destroy(gameObject);
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ public class EnemiesManager : MonoBehaviour
     private void Start()
     {
         enemies = GetComponentsInChildren<EnemyController>(true).ToList();
+    }
+
+    private void Update()
+    {
+        enemies.RemoveAll(enemyController => enemyController == null);
     }
 
     private void OnCollisionEnter(Collision other)
