@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (life <= 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene(1);
         }
     }
 }
