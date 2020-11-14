@@ -19,10 +19,12 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Start()
     {
+        GenerateRooms();
+        soundManager = FindObjectOfType<SoundManager>();
+        soundManager.InitAnalyzer();
         soundManager.StartRandomMusic();
         soundManager.AnalyzeCurrentClip();
         soundManager.CreateEventProviderOnCurrentSoundWithOffset();
-        GenerateRooms();
     }
 
     private void GenerateRooms()

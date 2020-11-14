@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using RhythmTool;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource currentClip;
     private RhythmData rhythmData;
     private RhythmEventProvider eventProvider;
-
+    private int sceneId = 0;
+    
     private static float _masterVolume = 1;
     private static float _musicVolume = 0.4f;
     private static float _soundEffectVolume = 1;
@@ -44,6 +46,13 @@ public class SoundManager : MonoBehaviour
     
     
     private void Start()
+    {
+        RhythmToolLib.CreateAnalyzer(true,true,withVolumeSampler:true);
+        RhythmToolLib.SetOnsetDetectorParams(threshold: 0.7f);
+        RhythmToolLib.SetVolumeSamplerParams(smoothing: 14);
+    }
+
+    public void InitAnalyzer()
     {
         RhythmToolLib.CreateAnalyzer(true,true,withVolumeSampler:true);
         RhythmToolLib.SetOnsetDetectorParams(threshold: 0.7f);

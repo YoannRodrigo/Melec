@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957541332811254423, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3957541333023352635, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -265,6 +265,14 @@ PrefabInstance:
     - target: {fileID: 3957541333162953067, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
       propertyPath: m_Name
       value: MainMenuManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957541333162953068, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
+      propertyPath: songNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957541333162953068, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
+      propertyPath: songNames.Array.data[0]
+      value: VaporWaveMain
       objectReference: {fileID: 0}
     - target: {fileID: 3957541333162953069, guid: d11b0767ba3926b4c92b62a016cfdb1d, type: 3}
       propertyPath: m_RootOrder

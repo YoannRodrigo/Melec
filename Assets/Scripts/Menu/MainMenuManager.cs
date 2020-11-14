@@ -54,6 +54,7 @@ public class MainMenuManager : MonoBehaviour
             }
             else
             {
+                Time.timeScale = 0;
                 mainCanvas.gameObject.SetActive(true);
                 currentMenu.SetActive(true);
             }
@@ -85,6 +86,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickReturnToGame()
     {
+        Time.timeScale = 1;
         currentMenu.SetActive(false);
         mainCanvas.gameObject.SetActive(false);
         currentMenu = gameMenu;

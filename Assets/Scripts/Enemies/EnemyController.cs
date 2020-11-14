@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public GameObject firePoint;
     private const float TIME_BEFORE_SHOT = 2;
     public float life;
-    private SoundManager soundManager;
+    public SoundManager soundManager;
 
     private void OnEnable()
     {
@@ -44,7 +44,10 @@ public class EnemyController : MonoBehaviour
 
     private void OnsetEvent(Onset onset)
     {
-        ShootProjectile();
+        if(Time.timeScale != 0)
+        {
+            ShootProjectile();
+        }
     }
 
     private void Start()
@@ -55,13 +58,10 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(Vector3.Scale(0.2f*playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
-        /*if (timeSinceLastShot > TIME_BEFORE_SHOT)
+        if(playerRigidbody)
         {
-            timeSinceLastShot = 0;
-            ShootProjectile();
+            transform.LookAt(Vector3.Scale(0.2f * playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
         }
-        timeSinceLastShot += Time.deltaTime;*/
     }
 
     private void ShootProjectile()
