@@ -30,10 +30,13 @@ public class ScriptableRoom : ScriptableObject
             int randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + i, 0, floor.transform.position.z - 4f),
                 Quaternion.identity, floor.transform);
+            randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + i, 0, floor.transform.position.z + 4f),
                 Quaternion.identity, floor.transform);
+            randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x - i, 0, floor.transform.position.z - 4f),
                 Quaternion.identity, floor.transform);
+            randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x - i, 0, floor.transform.position.z + 4f),
                 Quaternion.identity, floor.transform);
             
@@ -44,9 +47,27 @@ public class ScriptableRoom : ScriptableObject
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z + j),
                 Quaternion.identity,
                 floor.transform);
+            randomId = Random.Range(0,walls.Count);
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z + j),
                 Quaternion.identity,
                 floor.transform);
+        }
+
+        if (isEntrance)
+        {
+            int randomId = Random.Range(0,walls.Count);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 0.5f, 0, floor.transform.position.z - 4f),
+                Quaternion.identity, floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 0.5f, 0, floor.transform.position.z - 4f),
+                Quaternion.identity, floor.transform);
+        }
+        else if (isEnd)
+        {
+            int randomId = Random.Range(0,walls.Count);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 0.5f, 0, floor.transform.position.z + 4f),
+                Quaternion.identity, floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 0.5f, 0, floor.transform.position.z + 4f),
+                Quaternion.identity, floor.transform);
         }
     }
 
