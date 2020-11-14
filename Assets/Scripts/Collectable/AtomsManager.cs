@@ -12,16 +12,26 @@ public class AtomsManager : MonoBehaviour
     };
     
     public Atom[] atomsArray;
-    public GameObject atomPrefab;
 
-    public GameObject SpawnAtom(AtomAbb atom, Vector3 position){ 
-        GameObject atomToSpawn;
-        foreach(Atom a in atomsArray){
-            if(a.abbreviation == atom){
-                atomToSpawn = a.overworldGO;
-                atomToSpawn.GetComponent<Renderer>().material = a.material;
+    public void SpawnAtom(AtomAbb atomAbb, Vector3 position){ 
+        GameObject go_atomToSpawn = new GameObject();
+        Atom atom = new Atom();
+        foreach(Atom currentAtom in atomsArray){
+            if(currentAtom.abbreviation == atomAbb){
+                atom = currentAtom;
             }
         }
-        return Instantiate(atomPrefab, position, Quaternion.identity);
+        //Apply atom properties
+        SpriteRenderer SpriteR = go_atomToSpawn.AddComponent<SpriteRenderer>();
+        SpriteR.sprite = atom.sprite;
+        BoxCollider bc = go_atomToSpawn.AddComponent<BoxCollider>();
+        bc.isTrigger = true;
+        //Add a pickable behavior to spawned atom
+        Pickable p = go_atomToSpawn.AddComponent<Pickable>();
+        p.atomType = atom;
+        //Apply name
+        go_atomToSpawn.name = atom.abbreviation.ToString();
+        //Apply position
+        go_atomToSpawn.transform.position = position;
     }
 }

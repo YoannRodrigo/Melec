@@ -7,7 +7,6 @@ public class Atom : ScriptableObject
 {
     public string name;
     public AtomsManager.AtomAbb abbreviation;
-    public Material material;
     public Sprite sprite;
-    public GameObject overworldGO;
+
 }

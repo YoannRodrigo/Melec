@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+
+    public List<Atom> inventory = new List<Atom>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,4 +19,13 @@ public class Inventory : MonoBehaviour
     {
         
     }
+
+    public void Add(Atom atomToAdd){
+        print("Added " + atomToAdd + " to Inventory");
+        inventory.Add(atomToAdd);
+    }
+
+/*     public void Remove(Atom atomToRemove){
+        
+    } */
 }

@@ -11,9 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d2127092beb79f4ca55609c37f9f854, type: 3}
   m_Name: Hydrogen
-  m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
-  name: Hydrogen
+  m_EditorClassIdentifier: 
+  name: 
   abbreviation: 0
-  material: {fileID: 2100000, guid: e4107548839471944965346d2f67c19a, type: 2}
-  sprite: {fileID: 0}
-  overworldGO: {fileID: 2771998385108402812, guid: af4417270c0a9bb45bc9de70b3ca835a, type: 3}
+  sprite: {fileID: 21300000, guid: e81ed2f6bc37959409bc7bc3def1e8bb, type: 3}
