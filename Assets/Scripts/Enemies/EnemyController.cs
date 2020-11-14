@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float life;
     private SoundManager soundManager;
     private CollectablesManager collectablesManager;
+    private int dropRate = 60;
 
     private void OnEnable()
     {
@@ -87,9 +88,13 @@ public class EnemyController : MonoBehaviour
     {
         if (life <= 0)
         {
-            int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
-            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
-            Destroy(gameObject);
+            int dropChance = Random.Range(0, 101);
+            if(dropChance < dropRate)
+            {
+                int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
+                collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
+                Destroy(gameObject);
+            }
         }
     }
 }
