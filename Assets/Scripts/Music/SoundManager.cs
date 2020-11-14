@@ -22,16 +22,26 @@ public class SoundManager : MonoBehaviour
     public void SetMasterVolume(Slider slider)
     {
         _masterVolume = slider.value;
+        UpdateVolume();
     }
 
     public void SetMusicVolume(Slider slider)
     {
         _musicVolume = slider.value;
+        UpdateVolume();
     }
     
     public void SetSoundEffectVolume(Slider slider)
     {
         _soundEffectVolume = slider.value;
+    }
+
+    private void UpdateVolume()
+    {
+        if (currentClip)
+        {
+            currentClip.volume = _masterVolume * _musicVolume;
+        }
     }
     
     public RhythmData GetRhythmData()
