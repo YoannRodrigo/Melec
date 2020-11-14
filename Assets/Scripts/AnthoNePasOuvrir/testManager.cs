@@ -17,9 +17,10 @@ public class testManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            inventory.MergeAtoms(0, 1);
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            //Time.timeScale = .3f;
+            //Enter inventory mode
+            
         }
     }
 }
