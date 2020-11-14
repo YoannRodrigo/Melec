@@ -6,32 +6,46 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public CollectablesManager collectablesManager;
-    public List<Atom> inventory = new List<Atom>();
+    public List<Collectable> inventory = new List<Collectable>();
+    public const int MAX_CAPACITY = 7;
 
-    public void Add(Atom atomToAdd){
-        print("Added " + atomToAdd + " to Inventory");
-        inventory.Add(atomToAdd);
+    public bool Add(Collectable atomToAdd){
+        if (inventory.Count < MAX_CAPACITY) {
+            print("Added " + atomToAdd.collectableName + " to Inventory");
+            inventory.Add(atomToAdd);
+            return true;
+        }
+        print("Inventory is full.");
+        return false;
     }
 
-    public Molecule MergeAtoms(Atom a, Atom b)
+    public Collectable MergeAtoms(int indexA, int indexB)
     {
-        Molecule result = null;
-        string nameA = a.abbreviation.ToString();
-        string nameB = b.abbreviation.ToString();
+        Collectable result = null;
+        Collectable a = inventory[indexA];
+        Collectable b = inventory[indexB];
+        string nameA = a.atomAbb.ToString();
+        string nameB = b.atomAbb.ToString();
         int resultLenght = (nameA + nameB).Length;
-        foreach (Molecule m in collectablesManager.moleculesArray){
-            if (m.abbreviation.ToString().Length == resultLenght) {
-                if ((nameA + nameB) == m.abbreviation.ToString() || (nameB + nameA) == m.abbreviation.ToString()) {
+        foreach (Collectable m in collectablesManager.moleculesArray){
+            if (m.molAbb.ToString().Length == resultLenght) {
+                if ((nameA + nameB) == m.molAbb.ToString() || (nameB + nameA) == m.molAbb.ToString()) {
                     result = m;
                 }
             }
         }
+        //Clear B
+        inventory[indexB] = null;
+        
         //Return result
         if(result != null){
-            print("Successfully created " + result.abbreviation.ToString() + " by fusing " + nameA + " & " + nameB);
+            print("Successfully created " + result.molAbb.ToString() + " by fusing " + nameA + " & " + nameB);
+            inventory[indexA] = result;
         }
         else {
             print("EXU-PURO-SIOOOOOOOON ! Fusing " + nameA + " & " + nameB + " didn't worked...");
+            //Clear A
+            inventory[indexA] = null;
         }
 
         return result;
