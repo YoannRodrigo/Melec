@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemiesManager : MonoBehaviour
 {
     private List<EnemyController> enemies = new List<EnemyController>();
-
+    public List<GameObject> doors = new List<GameObject>();
     private void Start()
     {
         enemies = GetComponentsInChildren<EnemyController>(true).ToList();
@@ -14,6 +14,10 @@ public class EnemiesManager : MonoBehaviour
     private void Update()
     {
         enemies.RemoveAll(enemyController => enemyController == null);
+        if (enemies.Count == 0)
+        {
+            doors.ForEach(door => door.SetActive(false));
+        }
     }
 
     private void OnCollisionEnter(Collision other)
