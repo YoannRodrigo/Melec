@@ -540,8 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atomsArray:
   - {fileID: 11400000, guid: 9a1aaf7cc2d884246ad3e2f8f296440d, type: 2}
-  - {fileID: 11400000, guid: 8b6d4113c094dac4e94f062f9d2cc09c, type: 2}
-  - {fileID: 11400000, guid: 398ed43ffa72ed643b7a16d580d732f3, type: 2}
+  - {fileID: 11400000, guid: f8684f6d4a4e4484f832b6d88b61bd6c, type: 2}
+  - {fileID: 11400000, guid: cfdb219e46304954fa7b20774bbf06d2, type: 2}
+  atomPrefab: {fileID: 2771998385108402812, guid: af4417270c0a9bb45bc9de70b3ca835a, type: 3}
 --- !u!4 &1320785594
 Transform:
   m_ObjectHideFlags: 0
