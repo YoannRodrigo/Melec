@@ -678,6 +678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Porte
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cf0215b85823d4241b5f75b65a1dff3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0215b85823d4241b5f75b65a1dff3a, type: 3}
 --- !u!1001 &593106807
@@ -1002,6 +1006,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c61001eb81636e942afe3abcf07b43c8, type: 3}
       propertyPath: m_Name
       value: Porte_Ouverture
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c61001eb81636e942afe3abcf07b43c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61001eb81636e942afe3abcf07b43c8, type: 3}
@@ -2612,6 +2620,10 @@ PrefabInstance:
     - target: {fileID: 444054967958271871, guid: d0bb68634fb612a49a328bff06eb2848, type: 3}
       propertyPath: m_Name
       value: Erlenmeyer_Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 444054967958271871, guid: d0bb68634fb612a49a328bff06eb2848, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0bb68634fb612a49a328bff06eb2848, type: 3}

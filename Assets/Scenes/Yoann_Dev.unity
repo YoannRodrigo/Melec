@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.078987196, g: 0.11767344, b: 0.23584908, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1421,7 +1421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005332207422514024, guid: 62228ffa64966ae408c0988116d65d49, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 279
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3005332207422514027, guid: 62228ffa64966ae408c0988116d65d49, type: 3}
       propertyPath: m_RootOrder
@@ -1780,7 +1780,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.16660734, g: 0.19363438, b: 0.3018868, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
