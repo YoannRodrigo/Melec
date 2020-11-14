@@ -16,4 +16,4 @@ MonoBehaviour:
   type: 1
   atomAbb: 9
   molAbb: 4
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: fee4764f776d25348b05b691feeab0f1, type: 3}
