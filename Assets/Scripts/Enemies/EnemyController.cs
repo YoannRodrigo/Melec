@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void Start()
     {
         collectablesManager = FindObjectOfType<CollectablesManager>();
-        playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
+        playerRigidbody = FindObjectOfType<PlayerMovement>().GetComponent<Rigidbody>();
         soundManager = FindObjectOfType<SoundManager>();
     }
 
@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.name.Contains("GoodProjectile"))
         {
-            Collectable collectable = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetCollectibleAttack();
+            Collectable collectable = FindObjectOfType<PlayerMovement>().GetComponent<PlayerMovement>().GetCollectibleAttack();
             isSlow = collectable.atomAbb == CollectablesManager.AtomAbb.CL;
             isDoT = collectable.atomAbb == CollectablesManager.AtomAbb.S;
             life -= other.gameObject.GetComponent<ProjectileCollision>().DealsDamage();
