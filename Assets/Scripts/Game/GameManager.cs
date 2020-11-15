@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         gameState = GameStates.GAME;
-        player = GameObject.FindWithTag("Player");
+        player = FindObjectOfType<PlayerMovement>().gameObject;
         inventory = player.GetComponent<Inventory>();
     }
 
