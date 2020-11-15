@@ -58,13 +58,22 @@ public class PlayerMovement : MonoBehaviour
 
    private void MovePlayer()
    {
-      if (GameManager.instance.gameState == GameManager.GameStates.GAME) {
-         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-         rb.velocity = new Vector3 (0, rb.velocity.y, 0) + SPEED * movement;
-         if (!isShooting)
+      switch (GameManager.instance.gameState)
+      {
+         case GameManager.GameStates.GAME:
          {
-            RotatePlayer(movement);
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            rb.velocity = new Vector3 (0, rb.velocity.y, 0) + SPEED * movement;
+            if (!isShooting)
+            {
+               RotatePlayer(movement);
+            }
+
+            break;
          }
+         case GameManager.GameStates.INVENTORY:
+            rb.velocity = Vector3.zero;
+            break;
       }
    }   
 }

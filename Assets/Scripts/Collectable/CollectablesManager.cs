@@ -18,7 +18,7 @@ public class CollectablesManager : MonoBehaviour
         SI,
         FE,
         UNDEFINED
-    };
+    }
     
     public enum MoleculeAbb{
         NACL,
@@ -33,7 +33,7 @@ public class CollectablesManager : MonoBehaviour
         FES,
         CLCL,
         UNDEFINED
-    };
+    }
     
     public Collectable[] atomsArray;
     public Collectable[] moleculesArray;

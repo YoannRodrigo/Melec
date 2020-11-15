@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Collectable", menuName = "ScriptableObjects/Collectable/Collectable", order = 1)]
-[System.Serializable]
+[Serializable]
 public class Collectable : ScriptableObject
 {
     public string collectableName;

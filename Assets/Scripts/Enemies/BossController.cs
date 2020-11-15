@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using RhythmTool;
 using UnityEngine;
-using DG.Tweening;
 
 public class BossController : EnemyController
 {

@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
                         //show Glass
                         inventory.mergeElements.SetActive(true);
                         //Pos and show cursor
-                        inventory.cursor.transform.parent = inventory.uiInventory.transform.Find("Slots").GetChild(inventory.cursorIndex).transform;
+                        inventory.cursor.transform.SetParent(inventory.uiInventory.transform.Find("Slots").GetChild(inventory.cursorIndex).transform);
                         inventory.cursor.GetComponent<RectTransform>().localPosition = Vector3.zero;
                         inventory.cursor.SetActive(true);
                         break;

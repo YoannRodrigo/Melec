@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class Inventory : MonoBehaviour
 {
@@ -18,13 +16,13 @@ public class Inventory : MonoBehaviour
     private float timeSinceLastMove = 1f;
     private const float TIME_BEFORE_SUBMIT = 0.1f;
     private float timeSinceLastSubmit = 1f;
-    public int cursorIndex = 0;
+    public int cursorIndex;
     public GameObject uiInventorySlots;
     public List<int> playerSelection = new List<int>();
     public GameObject atomToMergeA;
     public GameObject atomToMergeB;
 
-    void Start()
+    private void Start()
     {
         uiInventorySlots = uiInventory.transform.Find("Slots").gameObject;
     }
@@ -68,7 +66,7 @@ public class Inventory : MonoBehaviour
             int direction = (int)Mathf.Sign(Input.GetAxis("InventoryMove"));
             cursorIndex -= direction;
             cursorIndex = Mathf.Clamp(cursorIndex, 0, MAX_CAPACITY-1);
-            cursor.transform.parent = uiInventorySlots.transform.GetChild(cursorIndex);
+            cursor.transform.SetParent(uiInventorySlots.transform.GetChild(cursorIndex));
             cursor.GetComponent<RectTransform>().localPosition = Vector3.back;
         }
     }
@@ -83,12 +81,17 @@ public class Inventory : MonoBehaviour
             }
             else {
                 if (playerSelection.Count < 2) {
-                    if (inventory[cursorIndex].type == CollectablesManager.CollectableType.ATOM) {
+                    if (inventory[cursorIndex].type == CollectablesManager.CollectableType.ATOM)
+                    {
                         playerSelection.Add(cursorIndex);
-                        if (playerSelection.Count == 1) {
-                            atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
-                        }else if (playerSelection.Count == 2) {
-                            atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
+                        switch (playerSelection.Count)
+                        {
+                            case 1:
+                                atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
+                                break;
+                            case 2:
+                                atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
+                                break;
                         }
                     }
                     else {
@@ -122,7 +125,7 @@ public class Inventory : MonoBehaviour
         int resultLenght = (nameA + nameB).Length;
         foreach (Collectable m in collectablesManager.moleculesArray){
             if (m.molAbb.ToString().Length == resultLenght) {
-                if ((nameA + nameB) == m.molAbb.ToString() || (nameB + nameA) == m.molAbb.ToString()) {
+                if (nameA + nameB == m.molAbb.ToString() || nameB + nameA == m.molAbb.ToString()) {
                     result = m;
                 }
             }
@@ -132,7 +135,7 @@ public class Inventory : MonoBehaviour
         
         //Return result
         if(result != null){
-            print("Successfully created " + result.molAbb.ToString() + " by fusing " + nameA + " & " + nameB);
+            print("Successfully created " + result.molAbb + " by fusing " + nameA + " & " + nameB);
             inventory[indexA] = result;
         }
         else {

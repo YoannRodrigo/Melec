@@ -1,6 +1,5 @@
 ﻿using RhythmTool;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,9 +11,10 @@ public class EnemyController : MonoBehaviour
     public float life;
     internal SoundManager soundManager;
     private CollectablesManager collectablesManager;
-    private int dropRate = 60;
+    private int nbBeat;
+    private const int DROP_RATE = 60;
 
-    
+
     protected virtual void OnEnable()
     {
         if (!soundManager)
@@ -54,8 +54,13 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void OnBeat(Beat beat)
     {
-        if(Time.timeScale != 0)
+        if(Time.timeScale != 0 && GameManager.instance.gameState == GameManager.GameStates.GAME)
         {
+            ShootProjectile();
+        }
+        else if(GameManager.instance.gameState == GameManager.GameStates.INVENTORY && nbBeat % 2 == 0)
+        {
+            nbBeat++;
             ShootProjectile();
         }
     }
@@ -97,12 +102,12 @@ public class EnemyController : MonoBehaviour
         if (life <= 0)
         {
             int dropChance = Random.Range(0, 101);
-            if(dropChance < dropRate)
+            if(dropChance < DROP_RATE)
             {
                 int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
                 collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
-                Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
     }
 }
