@@ -18,6 +18,9 @@ public class EnemyController : MonoBehaviour
     private float timeSinceLastDoT;
     private bool isDead;
     private const float TIME_BEFORE_DOT = 1f;
+    public GameObject colliderGameObject;
+
+    public CollectablesManager.AtomAbb atomAbb;
 
 
     protected virtual void OnEnable()
@@ -81,7 +84,7 @@ public class EnemyController : MonoBehaviour
     {
         if(playerRigidbody)
         {
-            transform.LookAt(Vector3.Scale(0.2f * playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
+            colliderGameObject.transform.LookAt(Vector3.Scale(0.2f * playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
         }
 
         timeSinceLastDoT += Time.deltaTime;
@@ -97,7 +100,7 @@ public class EnemyController : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.transform.position, Quaternion.identity);
         projectile.GetComponent<ProjectileCollision>().SetLauncherInstanceId(gameObject.GetInstanceID());
-        projectile.GetComponent<Rigidbody>().AddForce(2*transform.forward,ForceMode.Impulse);
+        projectile.GetComponent<Rigidbody>().AddForce(2*colliderGameObject.transform.forward,ForceMode.Impulse);
         Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
@@ -125,11 +128,6 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Drop()
     {
-        int dropChance = Random.Range(0, 101);
-        if(dropChance < DROP_RATE)
-        {
-            int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
-            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
-        }
+        collectablesManager.SpawnAtom(atomAbb, transform.position + Vector3.up);
     }
 }
