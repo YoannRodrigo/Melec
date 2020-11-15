@@ -14,9 +14,6 @@ public class Inventory : MonoBehaviour
     public GameObject darkener;
     public GameObject cursor;
     public List<Collectable> inventory = new List<Collectable>();
-    public float TIME_BEFORE_INPUT = .75f;
-    public float timeSinceLastMove = 0f;
-    public float timeSinceLastSubmit = 0f;
     public int cursorIndex;
     public GameObject uiInventorySlots;
     public List<int> playerSelection = new List<int>();
@@ -30,22 +27,12 @@ public class Inventory : MonoBehaviour
         uiInventorySlots = uiInventory.transform.Find("Slots").gameObject;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        timeSinceLastMove += Time.deltaTime;
-        timeSinceLastSubmit += Time.deltaTime;
         if (GameManager.instance.gameState == GameManager.GameStates.INVENTORY)
         {
-            if (timeSinceLastMove > TIME_BEFORE_INPUT)
-            {
-                MoveCursor();
-                timeSinceLastMove = 0;
-            }
-            if (timeSinceLastSubmit > TIME_BEFORE_INPUT)
-            {
-                AddCursorSelection();
-                timeSinceLastSubmit = 0; 
-            }
+            MoveCursor();
+            AddCursorSelection();
         }
     }
 
@@ -64,9 +51,17 @@ public class Inventory : MonoBehaviour
 
     public void MoveCursor()
     {
-        if (Input.GetAxis("InventoryMove") != 0)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            int direction = (int)Mathf.Sign(Input.GetAxis("InventoryMove"));
+            int direction = -1;
+            cursorIndex -= direction;
+            cursorIndex = Mathf.Clamp(cursorIndex, 0, MAX_CAPACITY-1);
+            cursor.transform.SetParent(uiInventorySlots.transform.GetChild(cursorIndex));
+            cursor.GetComponent<RectTransform>().localPosition = Vector3.back;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            int direction = 1;
             cursorIndex -= direction;
             cursorIndex = Mathf.Clamp(cursorIndex, 0, MAX_CAPACITY-1);
             cursor.transform.SetParent(uiInventorySlots.transform.GetChild(cursorIndex));
@@ -76,7 +71,7 @@ public class Inventory : MonoBehaviour
 
     public void AddCursorSelection()
     {
-        if (Input.GetButton("Submit")) {
+        if (Input.GetKeyDown(KeyCode.Return)) {
             if (playerSelection.Count == 2)
             {
                 uiInventorySlots.transform.GetChild(playerSelection[0]).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,1f);
@@ -114,6 +109,8 @@ public class Inventory : MonoBehaviour
         if (inventory.Count < MAX_CAPACITY) {
             //print("Added " + atomToAdd.collectableName + " to Inventory");
             AddInInventory(atomToAdd);
+            GameObject.Find("Unlocks").GetComponent<Unlocks>().atomsUnlocked[atomToAdd.atomAbb] = true;
+            print("Unlocked " + atomToAdd.atomAbb.ToString());
             UpdateUIInventory();
             return true;
         }
@@ -146,6 +143,8 @@ public class Inventory : MonoBehaviour
             activeResultUI = mergeSuccess;
             mergeSuccess.transform.Find("Result").GetComponent<Image>().sprite = result.sprite;
             inventory[0] = result;
+            GameObject.Find("Unlocks").GetComponent<Unlocks>().moleculesUnlocked[result.molAbb] = true;
+            print("Unlocked " + result.molAbb);
         }
         else {
             activeResultUI = mergeFailure;

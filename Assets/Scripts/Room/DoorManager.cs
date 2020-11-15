@@ -10,7 +10,7 @@ public class DoorManager : MonoBehaviour
     private static readonly int OPEN = Animator.StringToHash("Open");
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
