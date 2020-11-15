@@ -17,7 +17,6 @@ public class HPManager : MonoBehaviour
     {
         float remainingHp = GetComponent<PlayerManager>().life;
         int hpDiff = 4 - Mathf.CeilToInt((remainingHp / 25));
-        print(hpDiff);
         if (hpDiff > 0)
         {
             for (int i = 0; i < hpDiff; i++)
