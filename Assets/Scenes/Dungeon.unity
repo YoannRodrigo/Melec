@@ -280,11 +280,15 @@ MonoBehaviour:
   collectablesManager: {fileID: 0}
   uiInventory: {fileID: 1353360234}
   blankFiller: {fileID: 21300000, guid: 997cb6ecd6deb8942bf4e18669c2557e, type: 3}
+  mergeElements: {fileID: 1353360238}
+  darkener: {fileID: 1353360239}
   cursor: {fileID: 1353360235}
   inventory: []
   cursorIndex: 0
   uiInventorySlots: {fileID: 0}
   playerSelection: 
+  atomToMergeA: {fileID: 1353360237}
+  atomToMergeB: {fileID: 1353360236}
 --- !u!1 &1179662834
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +473,26 @@ GameObject:
 --- !u!1 &1353360235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2974734045729223112, guid: 980f6e69436edbc4c9260f81f92f1726, type: 3}
+  m_PrefabInstance: {fileID: 1353360233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1353360236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1343577490274230072, guid: 980f6e69436edbc4c9260f81f92f1726, type: 3}
+  m_PrefabInstance: {fileID: 1353360233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1353360237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1343577489345212126, guid: 980f6e69436edbc4c9260f81f92f1726, type: 3}
+  m_PrefabInstance: {fileID: 1353360233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1353360238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1343577490301717980, guid: 980f6e69436edbc4c9260f81f92f1726, type: 3}
+  m_PrefabInstance: {fileID: 1353360233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1353360239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1343577489129804059, guid: 980f6e69436edbc4c9260f81f92f1726, type: 3}
   m_PrefabInstance: {fileID: 1353360233}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1833116760

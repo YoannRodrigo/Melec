@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -17,8 +15,8 @@ public class GameManager : MonoBehaviour
     public GameStates gameState;
     public GameObject player;
     private Inventory inventory;
-    private const float TIME_BEFORE_CLICK = .1f;
-    private float timeSinceLastClick = .1f;
+    private const float TIME_BEFORE_CLICK = 1;
+    private float timeSinceLastClick = 1;
 
     private void Awake()
     {
@@ -34,38 +32,47 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         timeSinceLastClick += Time.deltaTime;
-        if (timeSinceLastClick > TIME_BEFORE_CLICK)
-        {
+        
             ToggleMergerUI();
-            timeSinceLastClick = 0;
-        }
 
     }
 
-    public void ToggleMergerUI()
+    private void ToggleMergerUI()
     {
-        if (Input.GetButton("InventoryMode") && gameState == GameStates.GAME) {
-            //Swap game state
-            gameState = GameStates.INVENTORY;
-            //Darkener
-            inventory.darkener.GetComponent<Image>().DOFade(.8f, .5f);
-            //show Glass
-            inventory.mergeElements.SetActive(true);
-            //Pos and show cursor
-            inventory.cursor.transform.parent = inventory.uiInventory.transform.Find("Slots").GetChild(inventory.cursorIndex).transform;
-            inventory.cursor.GetComponent<RectTransform>().localPosition = Vector3.zero;
-            inventory.cursor.SetActive(true);
-        }else if(Input.GetButton("InventoryMode") && gameState == GameStates.INVENTORY) {
-            //Darkener
-            inventory.darkener.GetComponent<Image>().DOFade(0f, .5f);
-            //hide Glass
-            inventory.mergeElements.SetActive(false);
-            //hide cursor
-            inventory.cursor.SetActive(false);
-            //Swap game state
-            gameState = GameStates.GAME;
+        if (Input.GetButton("InventoryMode"))
+        {
+            if (timeSinceLastClick > TIME_BEFORE_CLICK)
+            {
+                switch (gameState)
+                {
+                    case GameStates.GAME:
+                        //Swap game state
+                        gameState = GameStates.INVENTORY;
+                        //Darkener
+                        inventory.darkener.GetComponent<Image>().DOFade(.8f, .5f);
+                        //show Glass
+                        inventory.mergeElements.SetActive(true);
+                        //Pos and show cursor
+                        inventory.cursor.transform.parent = inventory.uiInventory.transform.Find("Slots").GetChild(inventory.cursorIndex).transform;
+                        inventory.cursor.GetComponent<RectTransform>().localPosition = Vector3.zero;
+                        inventory.cursor.SetActive(true);
+                        break;
+                    case GameStates.INVENTORY:
+                        //Darkener
+                        inventory.darkener.GetComponent<Image>().DOFade(0f, .5f);
+                        //hide Glass
+                        inventory.mergeElements.SetActive(false);
+                        //hide cursor
+                        inventory.cursor.SetActive(false);
+                        //Swap game state
+                        gameState = GameStates.GAME;
+                        break;
+                }
+
+                timeSinceLastClick = 0;
+            }
         }
     }
 }
