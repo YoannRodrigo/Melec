@@ -109,6 +109,8 @@ public class Inventory : MonoBehaviour
         if (inventory.Count < MAX_CAPACITY) {
             //print("Added " + atomToAdd.collectableName + " to Inventory");
             AddInInventory(atomToAdd);
+            GameObject.Find("Unlocks").GetComponent<Unlocks>().atomsUnlocked[atomToAdd.atomAbb] = true;
+            print("Unlocked " + atomToAdd.atomAbb.ToString());
             UpdateUIInventory();
             return true;
         }
@@ -141,6 +143,8 @@ public class Inventory : MonoBehaviour
             activeResultUI = mergeSuccess;
             mergeSuccess.transform.Find("Result").GetComponent<Image>().sprite = result.sprite;
             inventory[0] = result;
+            GameObject.Find("Unlocks").GetComponent<Unlocks>().moleculesUnlocked[result.molAbb] = true;
+            print("Unlocked " + result.molAbb);
         }
         else {
             activeResultUI = mergeFailure;
