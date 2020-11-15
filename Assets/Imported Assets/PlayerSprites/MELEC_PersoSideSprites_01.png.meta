@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: af9adc815e3eac140a47b6e1ae2d6fe9
+guid: f058621f0106bf245b87d7110f076990
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6368318453134698909
-    second: MELEC_PersoFaceSprites_01_0
+      213: 6712848867563118109
+    second: MELEC_PersoSideSprites_01_0
   - first:
-      213: -7069880634880039423
-    second: MELEC_PersoFaceSprites_01_1
+      213: -1075630636803163520
+    second: MELEC_PersoSideSprites_01_1
   - first:
-      213: -6309239363278921590
-    second: MELEC_PersoFaceSprites_01_2
+      213: -4515161297002422534
+    second: MELEC_PersoSideSprites_01_2
   - first:
-      213: 7051542121101075273
-    second: MELEC_PersoFaceSprites_01_3
+      213: 7188345066424893122
+    second: MELEC_PersoSideSprites_01_3
   - first:
-      213: -6426658957368802481
-    second: MELEC_PersoFaceSprites_01_4
+      213: 7627559179257848902
+    second: MELEC_PersoSideSprites_01_4
   - first:
-      213: 1675202995608679615
-    second: MELEC_PersoFaceSprites_01_5
+      213: 118507039825953163
+    second: MELEC_PersoSideSprites_01_5
   - first:
-      213: 3564725609336756595
-    second: MELEC_PersoFaceSprites_01_6
+      213: -4081221833334589830
+    second: MELEC_PersoSideSprites_01_6
   - first:
-      213: -506874639356427816
-    second: MELEC_PersoFaceSprites_01_7
+      213: -2302466510434249488
+    second: MELEC_PersoSideSprites_01_7
   - first:
-      213: -8310777296875614896
-    second: MELEC_PersoFaceSprites_01_8
+      213: -6462972604224985008
+    second: MELEC_PersoSideSprites_01_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -116,12 +116,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_0
+      name: MELEC_PersoSideSprites_01_0
       rect:
         serializedVersion: 2
-        x: 67
+        x: 68
         y: 1056
-        width: 216
+        width: 228
         height: 343
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -130,40 +130,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d99a8af64efc06850800000000000000
-      internalID: 6368318453134698909
+      spriteID: d1e9bf59a74d82d50800000000000000
+      internalID: 6712848867563118109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_1
+      name: MELEC_PersoSideSprites_01_1
       rect:
         serializedVersion: 2
-        x: 67
-        y: 705
-        width: 216
-        height: 343
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 106ef89350db2ed90800000000000000
-      internalID: -7069880634880039423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_2
-      rect:
-        serializedVersion: 2
-        x: 417
-        y: 705
-        width: 216
+        x: 68
+        y: 706
+        width: 228
         height: 342
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -172,19 +151,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8029d41a341178a0800000000000000
-      internalID: -6309239363278921590
+      spriteID: 08af1df72a79211f0800000000000000
+      internalID: -1075630636803163520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_3
+      name: MELEC_PersoSideSprites_01_2
       rect:
         serializedVersion: 2
-        x: 67
-        y: 354
-        width: 216
+        x: 416
+        y: 706
+        width: 228
         height: 342
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -193,19 +172,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9432feec23c1cd160800000000000000
-      internalID: 7051542121101075273
+      spriteID: afe149409bce651c0800000000000000
+      internalID: -4515161297002422534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_4
+      name: MELEC_PersoSideSprites_01_3
       rect:
         serializedVersion: 2
-        x: 417
-        y: 354
-        width: 216
+        x: 68
+        y: 355
+        width: 228
         height: 342
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -214,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4343796abbefc6a0800000000000000
-      internalID: -6426658957368802481
+      spriteID: 2ceff2f90c122c360800000000000000
+      internalID: 7188345066424893122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_5
+      name: MELEC_PersoSideSprites_01_4
       rect:
         serializedVersion: 2
-        x: 767
-        y: 354
-        width: 216
-        height: 341
+        x: 416
+        y: 355
+        width: 228
+        height: 342
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,19 +214,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb4fce7bf348f3710800000000000000
-      internalID: 1675202995608679615
+      spriteID: 6442fe639a88ad960800000000000000
+      internalID: 7627559179257848902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_6
+      name: MELEC_PersoSideSprites_01_5
       rect:
         serializedVersion: 2
-        x: 67
+        x: 771
+        y: 355
+        width: 229
+        height: 342
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b81853c568505a100800000000000000
+      internalID: 118507039825953163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MELEC_PersoSideSprites_01_6
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 5
+        width: 228
+        height: 342
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a76f586ad569c57c0800000000000000
+      internalID: -4081221833334589830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MELEC_PersoSideSprites_01_7
+      rect:
+        serializedVersion: 2
+        x: 416
         y: 4
-        width: 216
+        width: 228
         height: 343
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -256,19 +277,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37951421e03787130800000000000000
-      internalID: 3564725609336756595
+      spriteID: 0f4555268eefb00e0800000000000000
+      internalID: -2302466510434249488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_7
+      name: MELEC_PersoSideSprites_01_8
       rect:
         serializedVersion: 2
-        x: 417
+        x: 771
         y: 4
-        width: 216
+        width: 229
         height: 343
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -277,29 +298,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d18187733837f8f0800000000000000
-      internalID: -506874639356427816
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MELEC_PersoFaceSprites_01_8
-      rect:
-        serializedVersion: 2
-        x: 767
-        y: 4
-        width: 216
-        height: 342
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05d0954b4103aac80800000000000000
-      internalID: -8310777296875614896
+      spriteID: 058a614a8a8ee46a0800000000000000
+      internalID: -6462972604224985008
       vertices: []
       indices: 
       edges: []
@@ -307,7 +307,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ae05bcd1db0fb3e45ac9cbca1a423f29
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
