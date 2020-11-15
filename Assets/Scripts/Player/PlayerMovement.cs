@@ -105,6 +105,26 @@ public class PlayerMovement : MonoBehaviour
 
    private void RotatePlayer(Vector3 movement)
    {
+      if (movement.x > 0 && movement.x > Mathf.Abs(movement.z))
+      {
+         animator.GetComponent<SpriteRenderer>().flipX = false;
+         animator.SetLayerWeight(1,0);
+         animator.SetLayerWeight(2,1);
+      }
+      else if (movement.x < 0 && Mathf.Abs(movement.x) > Mathf.Abs(movement.z))
+      {
+         animator.GetComponent<SpriteRenderer>().flipX = true;
+         animator.SetLayerWeight(1,1);
+         animator.SetLayerWeight(2,0);
+      }
+      else
+      {
+         animator.GetComponent<SpriteRenderer>().flipX = true;
+         animator.SetLayerWeight(1,0);
+         animator.SetLayerWeight(2,0);
+      }
+      
+      
       if(movement != Vector3.zero)
       {
          colliderTransform.rotation = Quaternion.LookRotation(movement);
