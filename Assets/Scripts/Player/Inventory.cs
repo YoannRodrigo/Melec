@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -13,10 +14,9 @@ public class Inventory : MonoBehaviour
     public GameObject darkener;
     public GameObject cursor;
     public List<Collectable> inventory = new List<Collectable>();
-    private const float TIME_BEFORE_MOVE = 0.075f;
-    private float timeSinceLastMove = 1f;
-    private const float TIME_BEFORE_SUBMIT = 0.075f;
-    private float timeSinceLastSubmit = 1f;
+    public float TIME_BEFORE_INPUT = 10f;
+    public float timeSinceLastMove = .9f;
+    public float timeSinceLastSubmit = .9f;
     public int cursorIndex;
     public GameObject uiInventorySlots;
     public List<int> playerSelection = new List<int>();
@@ -30,18 +30,18 @@ public class Inventory : MonoBehaviour
         uiInventorySlots = uiInventory.transform.Find("Slots").gameObject;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         timeSinceLastMove += Time.deltaTime;
         timeSinceLastSubmit += Time.deltaTime;
         if (GameManager.instance.gameState == GameManager.GameStates.INVENTORY)
         {
-            if (timeSinceLastMove > TIME_BEFORE_MOVE)
+            if (timeSinceLastMove > TIME_BEFORE_INPUT)
             {
                 MoveCursor();
                 timeSinceLastMove = 0;
             }
-            if (timeSinceLastSubmit > TIME_BEFORE_SUBMIT)
+            if (timeSinceLastSubmit > TIME_BEFORE_INPUT)
             {
                 AddCursorSelection();
                 timeSinceLastSubmit = 0; 
@@ -136,10 +136,7 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        //Clear B
-        inventory.RemoveAt(indexB);
-        inventory.RemoveAt(indexA);
-
+        
         Sequence showResult = DOTween.Sequence();
         GameObject activeResultUI;
         
@@ -170,6 +167,9 @@ public class Inventory : MonoBehaviour
         //reset merger UI
         atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().blank;
         atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().blank;
+        
+        inventory.RemoveAt(indexB);
+        inventory.RemoveAt(indexA);
 
         UpdateUIInventory();
 

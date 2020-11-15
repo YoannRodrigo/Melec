@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
                         gameState = GameStates.INVENTORY;
 
                         showMerger.Append(inventory.darkener.GetComponent<Image>().DOFade(.8f, .3f));
-                        showMerger.Append(inventory.mergeElements.transform.DOScale(1, .3f).SetEase(Ease.InOutSine));
+                        showMerger.Append(inventory.mergeElements.transform.DOScale(1.2f, .3f).SetEase(Ease.InOutSine));
 
                         showMerger.Play();
                         
@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour
                         //hide cursor
                         inventory.cursor.SetActive(false);
                         //Swap game state
+                        //Clear merger
+                        inventory.playerSelection.Clear();
+                        inventory.atomToMergeA.GetComponent<Image>().sprite = inventory.mergeElements.GetComponent<AtomsSprites>().blank;;
+                        inventory.atomToMergeB.GetComponent<Image>().sprite = inventory.mergeElements.GetComponent<AtomsSprites>().blank;;
                         gameState = GameStates.GAME;
                         break;
                 }
