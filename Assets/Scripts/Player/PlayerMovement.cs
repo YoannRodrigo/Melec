@@ -11,6 +11,13 @@ public class PlayerMovement : MonoBehaviour
    private float timeSinceLastShot = 2;
    private const float TIME_BEFORE_SHOT = 0.5f;
 
+   private Collectable collectableAttack;
+
+   public void SetCollectableAttack(Collectable collectableAttack)
+   {
+      this.collectableAttack = collectableAttack;
+   }
+
    private void Start()
    {
       rb = GetComponent<Rigidbody>();
