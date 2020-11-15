@@ -15,7 +15,8 @@ public class ScriptableRoom : ScriptableObject
     private List<GameObject> bosses = new List<GameObject>();
     private GameObject floor;
     private CollectablesManager collectablesManager;
-    
+    private GameObject door;
+
     public Transform SpawnRoom(Vector3 position)
     {
         Vector3 newPosition = new Vector3(position.x + 16,position.y,position.z);
@@ -39,7 +40,7 @@ public class ScriptableRoom : ScriptableObject
         }
         for (float j = -3; j < 4; j++)
         {
-            if(j!=0)
+            if(j < -1 || j > 1)
             {
                 int randomId = Random.Range(0, walls.Count);
                 Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z + j),
@@ -58,7 +59,14 @@ public class ScriptableRoom : ScriptableObject
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z),
                 Quaternion.identity,
                 floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z+1),
+                Quaternion.identity,
+                floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z-1),
+                Quaternion.identity,
+                floor.transform);
             SpawnAtoms();
+            SpawnDoor(false);
         }
         else if (isEnd)
         {
@@ -66,7 +74,19 @@ public class ScriptableRoom : ScriptableObject
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z),
                 Quaternion.identity,
                 floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z+1),
+                Quaternion.identity,
+                floor.transform);
+            Instantiate(walls[randomId], new Vector3(floor.transform.position.x + 7.5f, 0, floor.transform.position.z-1),
+                Quaternion.identity,
+                floor.transform);
             SpawnBoss();
+            SpawnDoor(true);
+        }
+        else
+        {
+            SpawnDoor(true);
+            SpawnDoor(false);
         }
     }
 
@@ -94,5 +114,13 @@ public class ScriptableRoom : ScriptableObject
         collectablesManager = FindObjectOfType<CollectablesManager>();
         int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
         collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, floor.transform.position + 2*Vector3.right + Vector3.up);
+    }
+
+    private void SpawnDoor(bool left)
+    {
+        door = Resources.Load("Door/Door") as GameObject;
+        float offset = left ? -7.5f : 7.5f;
+        GameObject newDoor = Instantiate(door, new Vector3(floor.transform.position.x + offset, 0, floor.transform.position.z), Quaternion.identity,floor.transform);
+        newDoor.GetComponentInChildren<DoorController>().isLeft = left;
     }
 }

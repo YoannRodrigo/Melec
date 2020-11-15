@@ -5,9 +5,12 @@ using UnityEngine;
 public class EnemiesManager : MonoBehaviour
 {
     private List<EnemyController> enemies = new List<EnemyController>();
-    public List<GameObject> doors = new List<GameObject>();
+    private List<DoorManager> doors = new List<DoorManager>();
+    private PlayerMovement playerMovement;
     private void Start()
     {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        doors = GetComponentsInChildren<DoorManager>().ToList();
         enemies = GetComponentsInChildren<EnemyController>(true).ToList();
     }
 
@@ -16,7 +19,21 @@ public class EnemiesManager : MonoBehaviour
         enemies.RemoveAll(enemyController => enemyController == null);
         if (enemies.Count == 0)
         {
-            doors.ForEach(door => door.SetActive(false));
+            if(playerMovement.GetCollectibleAttack())
+            {
+                foreach (DoorManager doorManager in doors)
+                {
+                    doorManager.doorController.gameObject.SetActive(false);
+                    doorManager.OpenDoor();
+                }
+            }
+            else
+            {
+                foreach (DoorManager doorManager in doors)
+                {
+                    doorManager.CloseDoor();
+                }
+            }
         }
     }
 
