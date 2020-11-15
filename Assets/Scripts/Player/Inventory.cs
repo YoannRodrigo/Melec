@@ -13,9 +13,9 @@ public class Inventory : MonoBehaviour
     public GameObject darkener;
     public GameObject cursor;
     public List<Collectable> inventory = new List<Collectable>();
-    private const float TIME_BEFORE_MOVE = 0.1f;
+    private const float TIME_BEFORE_MOVE = 0.075f;
     private float timeSinceLastMove = 1f;
-    private const float TIME_BEFORE_SUBMIT = 0.1f;
+    private const float TIME_BEFORE_SUBMIT = 0.075f;
     private float timeSinceLastSubmit = 1f;
     public int cursorIndex;
     public GameObject uiInventorySlots;
@@ -84,24 +84,25 @@ public class Inventory : MonoBehaviour
                 MergeAtoms(playerSelection[0], playerSelection[1]);
             }
             else {
-                if (playerSelection.Count < 2) {
-                    if (inventory[cursorIndex].type == CollectablesManager.CollectableType.ATOM)
+                if (playerSelection.Count < 2)
+                {
+                    if (cursorIndex < inventory.Count)
                     {
-                        playerSelection.Add(cursorIndex);
-                        uiInventorySlots.transform.GetChild(cursorIndex).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,.6f);
-                        switch (playerSelection.Count)
+                        if (inventory[cursorIndex].type == CollectablesManager.CollectableType.ATOM && !playerSelection.Contains(cursorIndex))
                         {
-                            case 1:
-                                atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[0]].atomAbb];
-                                break;
-                            case 2:
-                                atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[1]].atomAbb];
-                                break;
+                            playerSelection.Add(cursorIndex);
+                            uiInventorySlots.transform.GetChild(cursorIndex).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,.6f);
+                            switch (playerSelection.Count)
+                            {
+                                case 1:
+                                    atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[0]].atomAbb];
+                                    break;
+                                case 2:
+                                    atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[1]].atomAbb];
+                                    break;
+                            }
                         }
                     }
-                    else {
-                        print("Can't fuse an already fused Molecule");
-                    }  
                 }
             }
         }
@@ -151,6 +152,8 @@ public class Inventory : MonoBehaviour
         }
         else {
             activeResultUI = mergeFailure;
+            GetComponent<PlayerManager>().life -= 25;
+            GetComponent<HPManager>().UpdateHpUI();
         }
         playerSelection.Clear(); 
         activeResultUI.SetActive(true);

@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
-    private float life = 100;
+    public float life = 100;
+    public  float maxHp = 100;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerManager : MonoBehaviour
         {
             life -= other.gameObject.GetComponent<ProjectileCollision>().DealsDamage();
             Destroy(other.gameObject);
+            GetComponent<HPManager>().UpdateHpUI();
             CheckPlayerLife();
         }
     }

@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     internal SoundManager soundManager;
     private CollectablesManager collectablesManager;
     private int nbBeat;
-    private const int DROP_RATE = 40;
+    private const int DROP_RATE = 100;
     internal bool isSlow;
     private bool isDoT;
     private float timeSinceLastDoT;
