@@ -113,8 +113,6 @@ public class Inventory : MonoBehaviour
         if (inventory.Count < MAX_CAPACITY) {
             //print("Added " + atomToAdd.collectableName + " to Inventory");
             AddInInventory(atomToAdd);
-            GameObject.Find("Unlocks").GetComponent<Unlocks>().atomsUnlocked[atomToAdd.atomAbb] = true;
-            print("Unlocked " + atomToAdd.atomAbb.ToString());
             UpdateUIInventory();
             return true;
         }
@@ -134,6 +132,8 @@ public class Inventory : MonoBehaviour
             if (m.molAbb.ToString().Length == resultLenght) {
                 if (nameA + nameB == m.molAbb.ToString() || nameB + nameA == m.molAbb.ToString()) {
                     result = m;
+                    GameObject.Find("Unlocks").GetComponent<Unlocks>().moleculesUnlocked[result.molAbb] = true;
+                    print("Unlocked " + result.molAbb);
                 }
             }
         }
@@ -146,9 +146,7 @@ public class Inventory : MonoBehaviour
         {
             activeResultUI = mergeSuccess;
             mergeSuccess.transform.Find("Result").GetComponent<Image>().sprite = result.sprite;
-            inventory[0] = result;
-            GameObject.Find("Unlocks").GetComponent<Unlocks>().moleculesUnlocked[result.molAbb] = true;
-            print("Unlocked " + result.molAbb);
+            //inventory[0] = result;
         }
         else {
             activeResultUI = mergeFailure;
@@ -183,6 +181,11 @@ public class Inventory : MonoBehaviour
     {
         if(inventory.Count != 0)
         {
+            if (atomToAdd.type == CollectablesManager.CollectableType.ATOM)
+            {
+                GameObject.Find("Unlocks").GetComponent<Unlocks>().atomsUnlocked[atomToAdd.atomAbb] = true;
+                print("Unlocked " + atomToAdd.atomAbb.ToString());
+            }
             inventory.Add(inventory[inventory.Count-1]);
             for (int i = inventory.Count - 2; i > 0; i--)
             {
