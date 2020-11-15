@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BadProjectile"))
         {
-            life -= 5;
+            life -= other.gameObject.GetComponent<ProjectileCollision>().DealsDamage();
             Destroy(other.gameObject);
             CheckPlayerLife();
         }

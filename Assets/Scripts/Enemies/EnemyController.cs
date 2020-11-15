@@ -13,6 +13,10 @@ public class EnemyController : MonoBehaviour
     private CollectablesManager collectablesManager;
     private int nbBeat;
     private const int DROP_RATE = 40;
+    internal bool isSlow;
+    private bool isDoT;
+    private float timeSinceLastDoT;
+    private const float TIME_BEFORE_DOT = 1f;
 
 
     protected virtual void OnEnable()
@@ -58,7 +62,7 @@ public class EnemyController : MonoBehaviour
         {
             ShootProjectile();
         }
-        else if(GameManager.instance.gameState == GameManager.GameStates.INVENTORY && nbBeat % 2 == 0)
+        else if(isSlow || GameManager.instance.gameState == GameManager.GameStates.INVENTORY && nbBeat % 2 == 0)
         {
             nbBeat++;
             ShootProjectile();
@@ -78,6 +82,14 @@ public class EnemyController : MonoBehaviour
         {
             transform.LookAt(Vector3.Scale(0.2f * playerRigidbody.velocity + playerRigidbody.position, new Vector3(1, 0, 1)));
         }
+
+        timeSinceLastDoT += Time.deltaTime;
+        if (isDoT && timeSinceLastDoT > TIME_BEFORE_DOT)
+        {
+            timeSinceLastDoT = 0f;
+            life -= 1;
+            LifeCheck();
+        }
     }
 
     private void ShootProjectile()
@@ -92,7 +104,10 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.name.Contains("GoodProjectile"))
         {
-            life--;
+            Collectable collectable = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetCollectibleAttack();
+            isSlow = collectable.atomAbb == CollectablesManager.AtomAbb.CL;
+            isDoT = collectable.atomAbb == CollectablesManager.AtomAbb.S;
+            life -= other.gameObject.GetComponent<ProjectileCollision>().DealsDamage();
             LifeCheck();
         }
     }
