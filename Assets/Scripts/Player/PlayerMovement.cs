@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
    private float projectileSize;
    private int damage;
    
-   public Collectable collectableAttack;
+   private Collectable collectableAttack;
    private static readonly int SPEED1 = Animator.StringToHash("Speed");
    private static readonly int IS_SHOOTING = Animator.StringToHash("IsShooting");
    public Transform colliderTransform;
