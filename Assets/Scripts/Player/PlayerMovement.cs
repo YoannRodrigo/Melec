@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+   public List<Transform> alternativeFireN = new List<Transform>();
+   public Transform alternativeFireO;
    private const float SPEED = 10;
    private Rigidbody rb;
    private bool isShooting;
@@ -10,7 +13,13 @@ public class PlayerMovement : MonoBehaviour
    public GameObject projectilePrefab;
    private float timeSinceLastShot = 2;
    private const float TIME_BEFORE_SHOT = 0.5f;
+   private const float DEFAULT_SPEED_BALL = 4;
 
+   private float speedRate;
+   private float projectileSpeed;
+   private float projectileSize;
+   private int damage;
+   
    private Collectable collectableAttack;
 
    public void SetCollectableAttack(Collectable collectableAttack)
@@ -28,6 +37,18 @@ public class PlayerMovement : MonoBehaviour
       timeSinceLastShot += Time.deltaTime;
       MovePlayer();
       PlayerShoot();
+      UpdateState();
+   }
+
+   private void UpdateState()
+   {
+      if(collectableAttack)
+      {
+         speedRate = collectableAttack.atomAbb == CollectablesManager.AtomAbb.H ? 0.2f : TIME_BEFORE_SHOT;
+         projectileSpeed = collectableAttack.atomAbb == CollectablesManager.AtomAbb.SI ? 7 : DEFAULT_SPEED_BALL;
+         projectileSize = collectableAttack.atomAbb == CollectablesManager.AtomAbb.C ? 2 : 1;
+         damage = collectableAttack.atomAbb == CollectablesManager.AtomAbb.FE ? 3 : 1;
+      }
    }
 
    private void PlayerShoot()
@@ -39,13 +60,25 @@ public class PlayerMovement : MonoBehaviour
          {
             isShooting = true;
             RotatePlayer(shootDirection);
-            if (timeSinceLastShot > TIME_BEFORE_SHOT)
+            if (collectableAttack && timeSinceLastShot > speedRate)
             {
                timeSinceLastShot = 0;
-               GameObject bullet = Instantiate(projectilePrefab, shootingPoint.position, Quaternion.identity);
-               bullet.GetComponent<Rigidbody>().AddForce(4 * transform.forward, ForceMode.Impulse);
-               bullet.GetComponent<ProjectileCollision>().SetLauncherInstanceId(gameObject.GetInstanceID());
-               Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
+               SpawnProjectile(shootingPoint);
+               switch (collectableAttack.atomAbb)
+               {
+                  case CollectablesManager.AtomAbb.N:
+                  {
+                     foreach (Transform firePoint in alternativeFireN)
+                     {
+                        SpawnProjectile(firePoint);
+                     }
+
+                     break;
+                  }
+                  case CollectablesManager.AtomAbb.O:
+                     SpawnProjectile(alternativeFireO);
+                     break;
+               }
             }
          }
          else
@@ -53,6 +86,16 @@ public class PlayerMovement : MonoBehaviour
             isShooting = false;
          }
       }
+   }
+
+   private void SpawnProjectile(Transform firePoint)
+   {
+      GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(firePoint.transform.position - (transform.position + new Vector3(0,firePoint.transform.position.y,0)), Vector3.up));
+      bullet.transform.localScale *= projectileSize;
+      bullet.GetComponent<Rigidbody>().AddForce(projectileSpeed * transform.forward, ForceMode.Impulse);
+      bullet.GetComponent<ProjectileCollision>().SetLauncherInstanceId(gameObject.GetInstanceID());
+      bullet.GetComponent<ProjectileCollision>().SetDamage(damage);
+      Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
    }
 
    private void RotatePlayer(Vector3 movement)
@@ -82,5 +125,10 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             break;
       }
-   }   
+   }
+
+   public Collectable GetCollectibleAttack()
+   {
+      return collectableAttack;
+   }
 }

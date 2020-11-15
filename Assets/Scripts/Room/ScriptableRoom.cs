@@ -93,8 +93,6 @@ public class ScriptableRoom : ScriptableObject
     {
         collectablesManager = FindObjectOfType<CollectablesManager>();
         int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
-        Debug.Log(randomDropId);
-        Debug.Log((CollectablesManager.AtomAbb) randomDropId);
         collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, floor.transform.position + 2*Vector3.right + Vector3.up);
     }
 }

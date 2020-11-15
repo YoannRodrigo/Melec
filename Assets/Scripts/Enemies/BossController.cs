@@ -22,7 +22,8 @@ public class BossController : EnemyController
     private Attack circleAttack;
     public GameObject explosiveProjectile;
     public List<Transform> alternativeFirePoints = new List<Transform>();
-    
+    private int nbOnSet;
+
     private enum AttackStyle
     {
         WAVES,
@@ -69,7 +70,15 @@ public class BossController : EnemyController
 
     protected override void OnSetEvent(Onset onset)
     {
-        WavesAttack();
+        if (isSlow && nbOnSet % 2 == 0)
+        {
+            nbOnSet++;
+            WavesAttack();
+        }
+        else
+        {
+            WavesAttack();
+        }
     }
 
 
