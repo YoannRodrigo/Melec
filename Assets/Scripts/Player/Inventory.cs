@@ -114,7 +114,6 @@ public class Inventory : MonoBehaviour
             //print("Added " + atomToAdd.collectableName + " to Inventory");
             AddInInventory(atomToAdd);
             UpdateUIInventory();
-            GetComponent<PlayerMovement>().SetCollectableAttack(atomToAdd);
             return true;
         }
         //print("Inventory is full.");
