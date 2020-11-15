@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void ToggleMergerUI()
     {
-        if (Input.GetButton("InventoryMode"))
+        if (Input.GetButton("InventoryMode") && SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
         {
             if (timeSinceLastClick > TIME_BEFORE_CLICK)
             {

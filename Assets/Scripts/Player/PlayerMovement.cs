@@ -20,12 +20,7 @@ public class PlayerMovement : MonoBehaviour
    private float projectileSize;
    private int damage;
    
-   private Collectable collectableAttack;
-
-   public void SetCollectableAttack(Collectable collectableAttack)
-   {
-      this.collectableAttack = collectableAttack;
-   }
+   public Collectable collectableAttack;
 
    private void Start()
    {
@@ -34,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
    private void Update()
    {
+      if (GetComponent<Inventory>().inventory.Count > 0)
+      {
+         collectableAttack = GetComponent<Inventory>().inventory[0];
+      }
       timeSinceLastShot += Time.deltaTime;
       MovePlayer();
       PlayerShoot();
@@ -44,10 +43,30 @@ public class PlayerMovement : MonoBehaviour
    {
       if(collectableAttack)
       {
-         speedRate = collectableAttack.atomAbb == CollectablesManager.AtomAbb.H ? 0.2f : TIME_BEFORE_SHOT;
-         projectileSpeed = collectableAttack.atomAbb == CollectablesManager.AtomAbb.SI ? 7 : DEFAULT_SPEED_BALL;
-         projectileSize = collectableAttack.atomAbb == CollectablesManager.AtomAbb.C ? 2 : 1;
-         damage = collectableAttack.atomAbb == CollectablesManager.AtomAbb.FE ? 3 : 1;
+         speedRate = collectableAttack.molAbb == CollectablesManager.MoleculeAbb.HH 
+            ? .1f :
+                     collectableAttack.atomAbb == CollectablesManager.AtomAbb.H || 
+                     collectableAttack.molAbb == CollectablesManager.MoleculeAbb.HO || 
+                     collectableAttack.molAbb == CollectablesManager.MoleculeAbb.NH || 
+                     collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CH 
+            ? 0.2f : TIME_BEFORE_SHOT;
+         
+         projectileSpeed = collectableAttack.atomAbb == CollectablesManager.AtomAbb.S ? 7 : DEFAULT_SPEED_BALL;
+         
+         
+         projectileSize = collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CLCL 
+            ? 3 : 
+                     collectableAttack.atomAbb == CollectablesManager.AtomAbb.CL ||
+                     collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CCL
+            ? 2 : 1;
+         
+         
+         damage = collectableAttack.atomAbb == CollectablesManager.AtomAbb.C ||
+                  collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CO ||
+                  collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CH ||
+                  collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CCL
+            ? 3 : 1;
+         
       }
    }
 
@@ -64,20 +83,19 @@ public class PlayerMovement : MonoBehaviour
             {
                timeSinceLastShot = 0;
                SpawnProjectile(shootingPoint);
-               switch (collectableAttack.atomAbb)
+               if (collectableAttack.atomAbb == CollectablesManager.AtomAbb.N || collectableAttack.molAbb == CollectablesManager.MoleculeAbb.NH)
                {
-                  case CollectablesManager.AtomAbb.N:
+                  foreach (Transform firePoint in alternativeFireN)
                   {
-                     foreach (Transform firePoint in alternativeFireN)
-                     {
-                        SpawnProjectile(firePoint);
-                     }
-
-                     break;
+                     SpawnProjectile(firePoint);
                   }
-                  case CollectablesManager.AtomAbb.O:
-                     SpawnProjectile(alternativeFireO);
-                     break;
+               }
+               else if (collectableAttack.atomAbb == CollectablesManager.AtomAbb.O || 
+                        collectableAttack.molAbb == CollectablesManager.MoleculeAbb.HO || 
+                        collectableAttack.molAbb == CollectablesManager.MoleculeAbb.CO || 
+                        collectableAttack.molAbb == CollectablesManager.MoleculeAbb.NO)
+               {
+                  SpawnProjectile(alternativeFireO);
                }
             }
          }
