@@ -197,6 +197,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &846087735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 846087735, guid: 8a8200447b999d849bfbbcc3826cbd6b, type: 3}
+  m_PrefabInstance: {fileID: 7623746068699925841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &881264613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7623746067953404596, guid: 8a8200447b999d849bfbbcc3826cbd6b, type: 3}
@@ -322,6 +327,7 @@ GameObject:
   - component: {fileID: 950472400}
   - component: {fileID: 950472401}
   - component: {fileID: 950472402}
+  - component: {fileID: 950472403}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -436,8 +442,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alternativeFireN: []
   alternativeFireO: {fileID: 0}
+  animator: {fileID: 0}
   shootingPoint: {fileID: 2136298980}
   projectilePrefab: {fileID: 6861259136599679835, guid: ac6de3f31b60e704c935a7ebf2339979, type: 3}
+  colliderTransform: {fileID: 0}
 --- !u!114 &950472401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3586d8e241dd4d44f94eb591a48bc210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 100
+  maxHp: 4
 --- !u!114 &950472402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +486,21 @@ MonoBehaviour:
   atomToMergeB: {fileID: 1993335980}
   mergeSuccess: {fileID: 881264613}
   mergeFailure: {fileID: 1215251243}
+--- !u!114 &950472403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950472394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882bb15513fd8664387d1f20d65f55e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpUI: {fileID: 846087735}
+  hpEmpty: {fileID: 21300000, guid: 03eff1482127dda4287112dcbeb74f46, type: 3}
+  hpFull: {fileID: 21300000, guid: 3e925603c2039b74d9fba5abcc569f74, type: 3}
 --- !u!1 &1023765135 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7623746067844474846, guid: 8a8200447b999d849bfbbcc3826cbd6b, type: 3}

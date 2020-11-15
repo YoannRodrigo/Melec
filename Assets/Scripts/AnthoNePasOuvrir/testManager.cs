@@ -17,9 +17,7 @@ public class testManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            //Time.timeScale = .3f;
-            //Enter inventory mode
+        if (Input.GetKeyDown(KeyCode.A)) {
             
         }
     }
