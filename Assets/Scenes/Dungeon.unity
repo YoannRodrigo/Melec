@@ -750,13 +750,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 38f7310bdcf879346bedf0e8cf0e0aa5, type: 2}
   - {fileID: 11400000, guid: 05a77749fba1713459c7530804c82687, type: 2}
   - {fileID: 11400000, guid: ed2a21be48edfb449b45072c4e9f84cf, type: 2}
-  - {fileID: 11400000, guid: 6b6a1e86d4e6701469d0868f43eaf903, type: 2}
+  - {fileID: 11400000, guid: 3fe2e3b8d6c7acc4085e35f8e716535d, type: 2}
   - {fileID: 11400000, guid: 2a17659032b14ad4a966fa3b3d537af6, type: 2}
   - {fileID: 11400000, guid: b6d84d6c8fe7c3742b385674ceb1f089, type: 2}
   bossAtomsArray:
   - {fileID: 11400000, guid: 9f305bdc64ab5df469b648b773940595, type: 2}
   - {fileID: 11400000, guid: 5c4755097bf7651478edc30b2bddc124, type: 2}
-  - {fileID: 11400000, guid: 3fe2e3b8d6c7acc4085e35f8e716535d, type: 2}
+  - {fileID: 11400000, guid: 6b6a1e86d4e6701469d0868f43eaf903, type: 2}
   moleculesArray:
   - {fileID: 11400000, guid: 98e0cbb6c782bdc4aa4eee66ec1854b9, type: 2}
   - {fileID: 11400000, guid: cff648e973cee424cb3b608f58312c6c, type: 2}

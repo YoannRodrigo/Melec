@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (life <= 0)
         {
+            GetComponent<PlayerMovement>().SetLastRareCollectable(null);
             SceneManager.LoadScene(1);
         }
     }
