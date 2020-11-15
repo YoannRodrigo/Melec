@@ -13,13 +13,12 @@ public class CollectablesManager : MonoBehaviour
         C,
         CL,
         H,
-        SI,
+        S,
         N,
         O,
         FE,
         NA,
-        S,
-        UNDEFINED
+        SI
     }
     
     public enum MoleculeAbb{
@@ -34,7 +33,6 @@ public class CollectablesManager : MonoBehaviour
         HH,
         FES,
         CLCL,
-        UNDEFINED
     }
     
     public Collectable[] atomsArray;
