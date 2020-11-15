@@ -2642,6 +2642,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b3fc35d2c784f9c438486933df2f5027, type: 2}
+    - target: {fileID: 2732887986456035479, guid: 1b6adcbc6123f8d418dd3df683a75531, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732887986456035479, guid: 1b6adcbc6123f8d418dd3df683a75531, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6089913026283245117, guid: 1b6adcbc6123f8d418dd3df683a75531, type: 3}
       propertyPath: m_Name
       value: Porte_Ouverture
