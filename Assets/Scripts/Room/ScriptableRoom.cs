@@ -14,6 +14,8 @@ public class ScriptableRoom : ScriptableObject
     private List<GameObject> enemies = new List<GameObject>();
     private List<GameObject> bosses = new List<GameObject>();
     private GameObject floor;
+    private CollectablesManager collectablesManager;
+    
     public Transform SpawnRoom(Vector3 position)
     {
         Vector3 newPosition = new Vector3(position.x + 16,position.y,position.z);
@@ -56,6 +58,7 @@ public class ScriptableRoom : ScriptableObject
             Instantiate(walls[randomId], new Vector3(floor.transform.position.x - 7.5f, 0, floor.transform.position.z),
                 Quaternion.identity,
                 floor.transform);
+            SpawnAtoms();
         }
         else if (isEnd)
         {
@@ -84,5 +87,13 @@ public class ScriptableRoom : ScriptableObject
         bosses = Resources.LoadAll<GameObject>("Bosses/").ToList();
         int randomId = Random.Range(0,bosses.Count);
         Instantiate(bosses[randomId], floor.transform.position, Quaternion.identity,floor.transform).SetActive(false);
+    }
+
+    private void SpawnAtoms()
+    {
+        collectablesManager = FindObjectOfType<CollectablesManager>();
+        int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
+        Debug.Log(randomDropId);
+        collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, floor.transform.position + 2*Vector3.right + Vector3.up);
     }
 }
