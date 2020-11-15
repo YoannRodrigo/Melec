@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
    public List<Transform> alternativeFireN = new List<Transform>();
    public Transform alternativeFireO;
+   public Animator animator;
    private const float SPEED = 10;
    private Rigidbody rb;
    private bool isShooting;
@@ -21,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
    private int damage;
    
    private Collectable collectableAttack;
+   private static readonly int SPEED1 = Animator.StringToHash("Speed");
+   private static readonly int IS_SHOOTING = Animator.StringToHash("IsShooting");
+   public Transform colliderTransform;
 
    public void SetCollectableAttack(Collectable collectableAttack)
    {
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
    private void Update()
    {
       timeSinceLastShot += Time.deltaTime;
+      animator.SetBool(IS_SHOOTING, isShooting);
       MovePlayer();
       PlayerShoot();
       UpdateState();
@@ -92,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
    {
       GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(firePoint.transform.position - (transform.position + new Vector3(0,firePoint.transform.position.y,0)), Vector3.up));
       bullet.transform.localScale *= projectileSize;
-      bullet.GetComponent<Rigidbody>().AddForce(projectileSpeed * transform.forward, ForceMode.Impulse);
+      bullet.GetComponent<Rigidbody>().AddForce(projectileSpeed * colliderTransform.forward, ForceMode.Impulse);
       bullet.GetComponent<ProjectileCollision>().SetLauncherInstanceId(gameObject.GetInstanceID());
       bullet.GetComponent<ProjectileCollision>().SetDamage(damage);
       Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
@@ -102,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
    {
       if(movement != Vector3.zero)
       {
-         transform.rotation = Quaternion.LookRotation(movement);
+         colliderTransform.rotation = Quaternion.LookRotation(movement);
       }
    }
 
@@ -113,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
          case GameManager.GameStates.GAME:
          {
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            animator.SetFloat(SPEED1, movement.magnitude);
             rb.velocity = new Vector3 (0, rb.velocity.y, 0) + SPEED * movement;
             if (!isShooting)
             {
