@@ -113,7 +113,17 @@ public class ScriptableRoom : ScriptableObject
     {
         collectablesManager = FindObjectOfType<CollectablesManager>();
         int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
-        collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, floor.transform.position + 2*Vector3.right + Vector3.up);
+        Collectable lastRareCollectable = PlayerMovement.GetLastRareCollectable();
+        if (lastRareCollectable)
+        {
+            Pickable p = collectablesManager.SpawnRareAtom(lastRareCollectable.atomAbb, floor.transform.position + 2 * Vector3.right + Vector3.up);
+            p.SetIsRare(false);
+        }
+        else
+        {
+            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, floor.transform.position + 2*Vector3.right + Vector3.up);
+        }
+        
     }
 
     private void SpawnDoor(bool left)

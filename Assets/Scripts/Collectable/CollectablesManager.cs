@@ -4,7 +4,6 @@ using UnityEngine;
 public class CollectablesManager : MonoBehaviour
 {
     public static CollectablesManager instance;
-    
     public enum CollectableType {
         ATOM,
         MOLECULE
@@ -14,13 +13,12 @@ public class CollectablesManager : MonoBehaviour
         C,
         CL,
         H,
-        SI,
+        S,
         N,
         O,
         FE,
         NA,
-        S,
-        UNDEFINED
+        SI
     }
     
     public enum MoleculeAbb{
@@ -35,7 +33,6 @@ public class CollectablesManager : MonoBehaviour
         HH,
         FES,
         CLCL,
-        UNDEFINED
     }
     
     public Collectable[] atomsArray;
@@ -73,7 +70,7 @@ public class CollectablesManager : MonoBehaviour
         goAtomToSpawn.transform.position = position;
     }
     
-    public void SpawnRareAtom(AtomAbb atomAbb, Vector3 position){ 
+    public Pickable SpawnRareAtom(AtomAbb atomAbb, Vector3 position){ 
         GameObject goAtomToSpawn = new GameObject();
         Collectable atom = ScriptableObject.CreateInstance<Collectable>();
         foreach(Collectable currentAtom in bossAtomsArray){
@@ -88,10 +85,12 @@ public class CollectablesManager : MonoBehaviour
         bc.isTrigger = true;
         //Add a pickable behavior to spawned atom
         Pickable p = goAtomToSpawn.AddComponent<Pickable>();
+        p.SetIsRare();
         p.atomType = atom;
         //Apply name
         goAtomToSpawn.name = atom.atomAbb.ToString();
         //Apply position
         goAtomToSpawn.transform.position = position;
+        return p;
     }
 }

@@ -10,12 +10,13 @@ public class EnemyController : MonoBehaviour
     private const float TIME_BEFORE_SHOT = 2;
     public float life;
     internal SoundManager soundManager;
-    private CollectablesManager collectablesManager;
+    internal CollectablesManager collectablesManager;
     private int nbBeat;
     private const int DROP_RATE = 40;
     internal bool isSlow;
     private bool isDoT;
     private float timeSinceLastDoT;
+    private bool isDead;
     private const float TIME_BEFORE_DOT = 1f;
 
 
@@ -114,15 +115,21 @@ public class EnemyController : MonoBehaviour
 
     private void LifeCheck()
     {
-        if (life <= 0)
+        if (life <= 0 && !isDead)
         {
-            int dropChance = Random.Range(0, 101);
-            if(dropChance < DROP_RATE)
-            {
-                int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
-                collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
-            }
+            isDead = true;
+            Drop();
             Destroy(gameObject);
+        }
+    }
+
+    protected virtual void Drop()
+    {
+        int dropChance = Random.Range(0, 101);
+        if(dropChance < DROP_RATE)
+        {
+            int randomDropId = Random.Range(0, collectablesManager.atomsArray.Length);
+            collectablesManager.SpawnAtom((CollectablesManager.AtomAbb) randomDropId, transform.position + Vector3.up);
         }
     }
 }
