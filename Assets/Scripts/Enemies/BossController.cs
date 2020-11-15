@@ -92,4 +92,14 @@ public class BossController : EnemyController
             newProjectile.GetComponent<Rigidbody>().AddForce(5*newProjectile.transform.forward,ForceMode.Impulse);
         }
     }
+
+    protected override void Drop()
+    {
+        Pickable na = collectablesManager.SpawnRareAtom(CollectablesManager.AtomAbb.NA, transform.position + Vector3.up + Vector3.right);
+        Pickable fe = collectablesManager.SpawnRareAtom(CollectablesManager.AtomAbb.FE, transform.position + Vector3.up - Vector3.right);
+        Pickable si = collectablesManager.SpawnRareAtom(CollectablesManager.AtomAbb.SI, transform.position + Vector3.up + Vector3.forward);
+        na.otherRare.AddRange(new []{fe,si});
+        fe.otherRare.AddRange(new []{na,si});
+        si.otherRare.AddRange(new []{fe,na});
+    }
 }
