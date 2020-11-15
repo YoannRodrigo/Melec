@@ -20,12 +20,23 @@ public class PlayerMovement : MonoBehaviour
    private float projectileSpeed;
    private float projectileSize;
    private int damage;
-   
+
+   private static Collectable _lastRareCollectable;
    private Collectable collectableAttack;
    private static readonly int SPEED1 = Animator.StringToHash("Speed");
    private static readonly int IS_SHOOTING = Animator.StringToHash("IsShooting");
    public Transform colliderTransform;
 
+   public void SetLastRareCollectable(Collectable lastRareCollectable)
+   {
+      _lastRareCollectable = lastRareCollectable;
+   }
+
+   public static Collectable GetLastRareCollectable()
+   {
+      return _lastRareCollectable;
+   }
+   
    private void Start()
    {
       rb = GetComponent<Rigidbody>();
