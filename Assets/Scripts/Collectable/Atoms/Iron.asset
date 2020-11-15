@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableName: Iron
   type: 0
-  atomAbb: 8
+  atomAbb: 6
   molAbb: 11
   sprite: {fileID: 21300000, guid: 35275bde879934947b3cd32591f3d418, type: 3}

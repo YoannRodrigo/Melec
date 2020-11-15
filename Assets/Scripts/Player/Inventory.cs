@@ -107,8 +107,9 @@ public class Inventory : MonoBehaviour
     public bool Add(Collectable atomToAdd){
         if (inventory.Count < MAX_CAPACITY) {
             //print("Added " + atomToAdd.collectableName + " to Inventory");
-            inventory.Add(atomToAdd);
+            AddInInventory(atomToAdd);
             UpdateUIInventory();
+            GetComponent<PlayerMovement>().SetCollectableAttack(atomToAdd);
             return true;
         }
         //print("Inventory is full.");
@@ -149,5 +150,24 @@ public class Inventory : MonoBehaviour
         
         UpdateUIInventory();
         return result;
+    }
+
+    private void AddInInventory(Collectable atomToAdd)
+    {
+        if(inventory.Count != 0)
+        {
+            inventory.Add(inventory[inventory.Count-1]);
+            for (int i = inventory.Count - 2; i > 0; i--)
+            {
+                inventory[i] = inventory[i - 1];
+            }
+            inventory[0] = atomToAdd;
+        }
+        else
+        {
+            inventory.Add(atomToAdd);
+        }
+        
+        
     }
 }
