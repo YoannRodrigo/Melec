@@ -48,12 +48,15 @@ public class GameManager : MonoBehaviour
                 switch (gameState)
                 {
                     case GameStates.GAME:
+                        Sequence showMerger = DOTween.Sequence();
                         //Swap game state
                         gameState = GameStates.INVENTORY;
-                        //Darkener
-                        inventory.darkener.GetComponent<Image>().DOFade(.8f, .5f);
-                        //show Glass
-                        inventory.mergeElements.SetActive(true);
+
+                        showMerger.Append(inventory.darkener.GetComponent<Image>().DOFade(.8f, .3f));
+                        showMerger.Append(inventory.mergeElements.transform.DOScale(1, .3f).SetEase(Ease.InOutSine));
+
+                        showMerger.Play();
+                        
                         //Pos and show cursor
                         inventory.cursor.transform.SetParent(inventory.uiInventory.transform.Find("Slots").GetChild(inventory.cursorIndex).transform);
                         inventory.cursor.GetComponent<RectTransform>().localPosition = Vector3.zero;
@@ -61,9 +64,9 @@ public class GameManager : MonoBehaviour
                         break;
                     case GameStates.INVENTORY:
                         //Darkener
-                        inventory.darkener.GetComponent<Image>().DOFade(0f, .5f);
+                        inventory.darkener.GetComponent<Image>().DOFade(0f, .2f);
                         //hide Glass
-                        inventory.mergeElements.SetActive(false);
+                        inventory.mergeElements.transform.DOScale(0,.2f).SetEase(Ease.InOutSine);
                         //hide cursor
                         inventory.cursor.SetActive(false);
                         //Swap game state

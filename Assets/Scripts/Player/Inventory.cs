@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Inventory : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Inventory : MonoBehaviour
     public List<int> playerSelection = new List<int>();
     public GameObject atomToMergeA;
     public GameObject atomToMergeB;
+    public GameObject mergeSuccess;
+    public GameObject mergeFailure;
 
     private void Start()
     {
@@ -74,9 +77,10 @@ public class Inventory : MonoBehaviour
     public void AddCursorSelection()
     {
         if (Input.GetButton("Submit")) {
-            print(playerSelection.Count);
             if (playerSelection.Count == 2)
             {
+                uiInventorySlots.transform.GetChild(playerSelection[0]).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,1f);
+                uiInventorySlots.transform.GetChild(playerSelection[1]).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,1f);
                 MergeAtoms(playerSelection[0], playerSelection[1]);
             }
             else {
@@ -84,13 +88,14 @@ public class Inventory : MonoBehaviour
                     if (inventory[cursorIndex].type == CollectablesManager.CollectableType.ATOM)
                     {
                         playerSelection.Add(cursorIndex);
+                        uiInventorySlots.transform.GetChild(cursorIndex).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,.6f);
                         switch (playerSelection.Count)
                         {
                             case 1:
-                                atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
+                                atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[0]].atomAbb];
                                 break;
                             case 2:
-                                atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[cursorIndex].atomAbb];
+                                atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().atomsArray[inventory[playerSelection[1]].atomAbb];
                                 break;
                         }
                     }
@@ -132,22 +137,39 @@ public class Inventory : MonoBehaviour
         }
         //Clear B
         inventory.RemoveAt(indexB);
+        inventory.RemoveAt(indexA);
+
+        Sequence showResult = DOTween.Sequence();
+        GameObject activeResultUI;
         
         //Return result
-        if(result != null){
-            print("Successfully created " + result.molAbb + " by fusing " + nameA + " & " + nameB);
-            inventory[indexA] = result;
+        if(result != null)
+        {
+            activeResultUI = mergeSuccess;
+            mergeSuccess.transform.Find("Result").GetComponent<Image>().sprite = result.sprite;
+            inventory[0] = result;
         }
         else {
-            print("EXU-PURO-SIOOOOOOOON ! Fusing " + nameA + " & " + nameB + " didn't worked...");
-            //Clear A
-            inventory.RemoveAt(indexA);
+            activeResultUI = mergeFailure;
         }
-        playerSelection.Clear();
+        playerSelection.Clear(); 
+        activeResultUI.SetActive(true);
         
-        //SHOW UI RESULT
+        //Show result
+        showResult.Append(mergeElements.transform.DOScale(0,.5f).SetEase(Ease.InOutSine));
+        showResult.Append(activeResultUI.transform.DOScale(1, .5f).SetEase(Ease.InBounce));
+        showResult.AppendInterval(1.5f);
+        showResult.Append(activeResultUI.transform.DOScale(0, .25f));
+        showResult.Append(mergeElements.transform.DOScale(1,.5f).SetEase(Ease.InOutSine));
+
+        showResult.Play();
         
+        //reset merger UI
+        atomToMergeA.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().blank;
+        atomToMergeB.GetComponent<Image>().sprite = mergeElements.GetComponent<AtomsSprites>().blank;
+
         UpdateUIInventory();
+
         return result;
     }
 }
