@@ -14,9 +14,9 @@ public class Inventory : MonoBehaviour
     public GameObject darkener;
     public GameObject cursor;
     public List<Collectable> inventory = new List<Collectable>();
-    public float TIME_BEFORE_INPUT = 10f;
-    public float timeSinceLastMove = .9f;
-    public float timeSinceLastSubmit = .9f;
+    public float TIME_BEFORE_INPUT = .75f;
+    public float timeSinceLastMove = 0f;
+    public float timeSinceLastSubmit = 0f;
     public int cursorIndex;
     public GameObject uiInventorySlots;
     public List<int> playerSelection = new List<int>();

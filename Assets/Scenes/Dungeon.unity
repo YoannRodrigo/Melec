@@ -717,9 +717,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 390086710}
     - target: {fileID: 5885691573295493920, guid: fb60c62519841574d886484bbbe4b729, type: 3}
+      propertyPath: TIME_BEFORE_INPUT
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885691573295493920, guid: fb60c62519841574d886484bbbe4b729, type: 3}
+      propertyPath: timeSinceLastMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885691573295493920, guid: fb60c62519841574d886484bbbe4b729, type: 3}
       propertyPath: collectablesManager
       value: 
       objectReference: {fileID: 1179662837}
+    - target: {fileID: 5885691573295493920, guid: fb60c62519841574d886484bbbe4b729, type: 3}
+      propertyPath: timeSinceLastSubmit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5885691573295493944, guid: fb60c62519841574d886484bbbe4b729, type: 3}
       propertyPath: m_Name
       value: Player
