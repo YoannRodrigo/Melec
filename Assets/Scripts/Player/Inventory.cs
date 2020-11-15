@@ -76,7 +76,11 @@ public class Inventory : MonoBehaviour
             {
                 uiInventorySlots.transform.GetChild(playerSelection[0]).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,1f);
                 uiInventorySlots.transform.GetChild(playerSelection[1]).GetChild(0).GetComponent<Image>().color = new Color(255,255,255,1f);
-                MergeAtoms(playerSelection[0], playerSelection[1]);
+                Collectable c = MergeAtoms(playerSelection[0], playerSelection[1]);
+                if (c)
+                {
+                    Add(c);
+                }
             }
             else {
                 if (playerSelection.Count < 2)
