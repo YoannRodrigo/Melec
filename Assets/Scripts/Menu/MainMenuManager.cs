@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject soundMenu;
     public GameObject gameMenu;
+    public GameObject returnToGame;
 
     private GameObject currentMenu;
     private GameObject lastMenu;
@@ -57,6 +59,7 @@ public class MainMenuManager : MonoBehaviour
                 Time.timeScale = 0;
                 mainCanvas.gameObject.SetActive(true);
                 currentMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(returnToGame);
             }
         }
     }
